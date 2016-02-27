@@ -4,6 +4,10 @@ from learning import Learning
 
 QUOTES_CSV = 'data/DAT_NT_USDCAD_T_LAST_201601.csv'
 SCOPES = {1, 10, 50, 100, 500, 1000}
+Q = 0
+ALPHA = 0
+REWARD = 0
+DISCOUNT = 0
 
 class Executive(object):
     def __init__(self):
@@ -17,18 +21,23 @@ class Executive(object):
         while self.run:
             for scope in self.scopes:
                 if not scope.agents:
-                    scope.addAgent()
+                    scope.add_agent()
             self.supervise()
-            self.run = False
+            self.run = False # for debugging
 
     def supervise(self):
         for scope in self.scopes:
-            agents = scope.getAgents()
-            #print agents
+            agents = scope.get_agents()
+            for agent in agents:
+                agent.start_learning()
     
     def load_scopes(self):
+        q = Q
+        alpha = ALPHA
+        reward = REWARD
+        discount = DISCOUNT
         for scope in SCOPES:
-            self.scopes.append(Scope(scope))
+            self.scopes.append(Scope(scope, q, alpha, reward, discount))
 
     def load_csv(self):
         with open(QUOTES_CSV) as csvfile:
