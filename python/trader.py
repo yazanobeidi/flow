@@ -18,7 +18,7 @@ class Agent(Learning):
         self.status = ''
 
     def start_learning(self):
-        self.learn
+        pass#self.learn
 
     def open_position(self, type):
         pass
