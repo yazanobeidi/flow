@@ -31,7 +31,7 @@ class Executive(object):
 
     def load_csv(self):
         with open(QUOTES_CSV) as csvfile:
-            quotes = csv.reader(csvfile, delimiter=';', quotechar='|')
+            quotes = reader(csvfile, delimiter=';', quotechar='|')
             for quote in quotes:
                  self.quotes.append(quote[-2])
 
