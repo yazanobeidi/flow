@@ -1,14 +1,23 @@
 import csv
+from executive import Agent
 
 QUOTES_CSV = 'data/DAT_NT_USDCAD_T_LAST_201601.csv'
 
 class Executive(object):
     def __init__(self):
         self.quotes = []
+        self.agents = []
         self.load_csv()
 
     def start(self):
-        pass
+        if not self.agents:
+            self.agents.append(Agent())
+        self.supervise()
+
+    def supervise(self):
+        for agent in self.agents:
+            if agent.status = 'closed'
+            
 
     def load_csv(self):
         with open(QUOTES_CSV) as csvfile:
