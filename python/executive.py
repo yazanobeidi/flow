@@ -1,5 +1,6 @@
-import csv
-from executive import Agent, Scope, Learning
+from csv import reader
+from trader import Scope, Agent
+from learning import Learning
 
 QUOTES_CSV = 'data/DAT_NT_USDCAD_T_LAST_201601.csv'
 SCOPES = {1, 10, 50, 100, 500, 1000}
@@ -22,6 +23,7 @@ class Executive(object):
         for scope in self.scopes:
             for agent in scope.get_agents():
                 # Do something with agent
+                pass
     
     def load_scopes(self):
         for scope in SCOPES:
