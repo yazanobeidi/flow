@@ -1,23 +1,31 @@
 import csv
-from executive import Agent
+from executive import Agent, Scope
 
 QUOTES_CSV = 'data/DAT_NT_USDCAD_T_LAST_201601.csv'
+SCOPES = {1, 10, 50, 100, 500, 1000}
 
 class Executive(object):
     def __init__(self):
         self.quotes = []
-        self.agents = []
+        self.scopes = []
         self.load_csv()
 
     def start(self):
-        if not self.agents:
-            self.agents.append(Agent())
-        self.supervise()
+        self.load_scopes()
+        while True:
+            for scope in self.scopes:
+                if not scope.agent:
+                    scope.addAgent()
+            self.supervise()
 
     def supervise(self):
-        for agent in self.agents:
-            if agent.status = 'closed'
-            
+        for scope in self.scopes:
+            for agent in scope.get_agents():
+                # Do something with agent
+    
+    def load_scopes(self):
+        for scope in SCOPES:
+            self.scopes.append(Scope())
 
     def load_csv(self):
         with open(QUOTES_CSV) as csvfile:
