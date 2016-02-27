@@ -9,25 +9,26 @@ class Executive(object):
     def __init__(self):
         self.quotes = []
         self.scopes = []
+        self.run = True
         self.load_csv()
 
     def start(self):
         self.load_scopes()
-        while True:
+        while self.run:
             for scope in self.scopes:
-                if not scope.agent:
+                if not scope.agents:
                     scope.addAgent()
             self.supervise()
+            self.run = False
 
     def supervise(self):
         for scope in self.scopes:
-            for agent in scope.get_agents():
-                # Do something with agent
-                pass
+            agents = scope.getAgents()
+            #print agents
     
     def load_scopes(self):
         for scope in SCOPES:
-            self.scopes.append(Scope())
+            self.scopes.append(Scope(scope))
 
     def load_csv(self):
         with open(QUOTES_CSV) as csvfile:

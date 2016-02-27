@@ -7,6 +7,9 @@ class Scope(object):
     def addAgent(self):
         self.agents.append(Agent())
 
+    def getAgents(self):
+        return self.agents
+
 
 class Agent(object):
     def __init__(self, scope):
