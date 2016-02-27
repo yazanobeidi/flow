@@ -1,5 +1,5 @@
 import csv
-from executive import Agent, Scope
+from executive import Agent, Scope, Learning
 
 QUOTES_CSV = 'data/DAT_NT_USDCAD_T_LAST_201601.csv'
 SCOPES = {1, 10, 50, 100, 500, 1000}

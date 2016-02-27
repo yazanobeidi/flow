@@ -1,7 +1,11 @@
 
 class Scope(object):
     def __init__(self, scope):
-        self.agents = [Agent(scope)]
+        self.scope = scope
+        self.agents = [Agent(self.scope)]
+
+    def addAgent(self):
+        self.agents.append(Agent())
 
 
 class Agent(object):
@@ -13,8 +17,3 @@ class Agent(object):
 
     def close_order(self):
         pass
-
-
-if __name__ == "__main__":
-    trader = Executive()
-    trader.start()
