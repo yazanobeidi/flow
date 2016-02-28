@@ -6,7 +6,7 @@ class Indicators(object):
 
     def get_states(self, quotes):
         self.quotes = quotes
-        self.state = (crossover_indicator,
+        self.state = ((0,0,0),
                       0,
                       0,
                       0,
@@ -19,7 +19,7 @@ class Indicators(object):
     def moving_average(self, size, sliced):
         return sum(sliced)/size
 
-    def crossover_indicator(self, x, y):
+    def crossover_indicator(self, q, x, y):
         if self.moving_average(x, q[-x:]) < self.moving_average(y, q[-y:]):
             if self.moving_average(x, q[-x-1:-1]) > self.moving_average(y, 
                                                                     q[-y-1:-1]):

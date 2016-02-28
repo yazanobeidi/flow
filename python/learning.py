@@ -5,19 +5,25 @@ class Learning(object):
         self.reward = reward
         self.discount = discount
 
-    def qlearn(self, states):
-        self.q[states] = self.Q(states)
+    def qlearn(self, states, actions):
+        self.q[states] = [self.Q(states, actions) for action in actions if action is not None]
         return self.q[states]
 
-    def get(self, s, default=0):
+    def getq(self, s, a, default=0):
         try:
-            return self.q[s]
+            return self.q[s][a]
         except KeyError:
             return default
 
-    def Q(self, s):
+    def getr(self, s, a, default=0):
+        try:
+            return self.reward[s][a]
+        except IndexError:
+            return default
+
+    def Q(self, s, a):
         """
         s type: tuple: qstatespace
         """
-        return self.get(s) + self.alpha * (self.reward + self.discount * 
-                                                   max(self.Q(s)) - self.get(s))
+        return self.getq(s, a) + self.alpha * (self.reward(s, a) + \
+                               self.discount * max(self.Q(s, a)) - self.getq(s))

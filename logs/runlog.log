@@ -71,3 +71,171 @@
 2016-02-28 11:25:03,616 - flow - INFO - Quotes fetched
 2016-02-28 11:25:03,616 - flow - INFO - Trade 1
 2016-02-28 11:25:03,616 - flow - INFO - <trader.Agent object at 0x101689ed0> in <trader.Scope object at 0x101689e50> learning
+2016-02-28 11:40:12,605 - flow - INFO - Initializing Executive...
+2016-02-28 11:40:13,903 - flow - INFO - Loading data complete
+2016-02-28 11:40:13,903 - flow - INFO - Scopes generated
+2016-02-28 11:40:13,903 - flow - INFO - Running...
+2016-02-28 11:40:13,903 - flow - INFO - Quotes fetched
+2016-02-28 11:40:13,903 - flow - INFO - Trade 1
+2016-02-28 11:40:13,904 - flow - INFO - <trader.Agent object at 0x10a3b3f50> in <trader.Scope object at 0x10a3b3ed0> learning
+2016-02-28 11:40:25,275 - flow - INFO - Initializing Executive...
+2016-02-28 11:40:26,485 - flow - INFO - Loading data complete
+2016-02-28 11:40:26,485 - flow - INFO - Scopes generated
+2016-02-28 11:40:26,486 - flow - INFO - Running...
+2016-02-28 11:40:26,486 - flow - INFO - Quotes fetched
+2016-02-28 11:40:26,486 - flow - INFO - Trade 1
+2016-02-28 11:40:26,486 - flow - INFO - <trader.Agent object at 0x109342f90> in <trader.Scope object at 0x109342f10> learning
+2016-02-28 11:42:07,796 - flow - INFO - Initializing Executive...
+2016-02-28 11:42:08,962 - flow - INFO - Loading data complete
+2016-02-28 11:42:08,962 - flow - INFO - Scopes generated
+2016-02-28 11:42:08,962 - flow - INFO - Running...
+2016-02-28 11:42:08,963 - flow - INFO - Quotes fetched
+2016-02-28 11:42:08,963 - flow - INFO - Trade 1
+2016-02-28 11:42:08,963 - flow - INFO - <trader.Agent object at 0x109f06f90> in <trader.Scope object at 0x109f06f10> learning
+2016-02-28 11:42:40,461 - flow - INFO - Initializing Executive...
+2016-02-28 11:42:41,651 - flow - INFO - Loading data complete
+2016-02-28 11:42:41,651 - flow - INFO - Scopes generated
+2016-02-28 11:42:41,651 - flow - INFO - Running...
+2016-02-28 11:42:41,652 - flow - INFO - Quotes fetched
+2016-02-28 11:42:41,652 - flow - INFO - Trade 1
+2016-02-28 11:42:41,652 - flow - INFO - <trader.Agent object at 0x1019c7f90> in <trader.Scope object at 0x1019c7f50> learning
+2016-02-28 12:28:52,986 - flow - INFO - Initializing Executive...
+2016-02-28 12:28:54,152 - flow - INFO - Loading data complete
+2016-02-28 12:28:54,153 - flow - INFO - Scopes generated
+2016-02-28 12:28:54,153 - flow - INFO - Running...
+2016-02-28 12:28:54,153 - flow - INFO - Quotes fetched
+2016-02-28 12:28:54,153 - flow - INFO - Trade 1
+2016-02-28 12:28:54,153 - flow - INFO - <trader.Agent object at 0x10de42fd0> in <trader.Scope object at 0x10de42f90> learning
+2016-02-28 12:30:49,734 - flow - INFO - Initializing Executive...
+2016-02-28 12:30:50,914 - flow - INFO - Loading data complete
+2016-02-28 12:30:50,914 - flow - INFO - Scopes generated
+2016-02-28 12:30:50,914 - flow - INFO - Running...
+2016-02-28 12:30:50,914 - flow - INFO - Quotes fetched
+2016-02-28 12:30:50,914 - flow - INFO - Trade 1
+2016-02-28 12:30:50,915 - flow - INFO - <trader.Agent object at 0x103d11050> in <trader.Scope object at 0x103cfefd0> learning
+2016-02-28 12:34:29,798 - flow - INFO - Initializing Executive...
+2016-02-28 12:34:30,919 - flow - INFO - Loading data complete
+2016-02-28 12:34:30,919 - flow - INFO - Scopes generated
+2016-02-28 12:34:30,920 - flow - INFO - Running...
+2016-02-28 12:34:30,920 - flow - INFO - Quotes fetched
+2016-02-28 12:34:30,920 - flow - INFO - Trade 1
+2016-02-28 12:34:30,920 - flow - INFO - <trader.Agent object at 0x10cf9efd0> in <trader.Scope object at 0x10cf9ef90> learning
+2016-02-28 12:35:27,306 - flow - INFO - Initializing Executive...
+2016-02-28 12:35:28,506 - flow - INFO - Loading data complete
+2016-02-28 12:35:28,506 - flow - INFO - Scopes generated
+2016-02-28 12:35:28,506 - flow - INFO - Running...
+2016-02-28 12:35:28,506 - flow - INFO - Quotes fetched
+2016-02-28 12:35:28,507 - flow - INFO - Trade 1
+2016-02-28 12:35:28,507 - flow - INFO - <trader.Agent object at 0x10f97dfd0> in <trader.Scope object at 0x10f97df90> learning
+2016-02-28 12:35:40,552 - flow - INFO - Initializing Executive...
+2016-02-28 12:35:41,678 - flow - INFO - Loading data complete
+2016-02-28 12:35:41,678 - flow - INFO - Scopes generated
+2016-02-28 12:35:41,679 - flow - INFO - Running...
+2016-02-28 12:35:41,679 - flow - INFO - Quotes fetched
+2016-02-28 12:35:41,679 - flow - INFO - Trade 1
+2016-02-28 12:35:41,679 - flow - INFO - <trader.Agent object at 0x10c72cfd0> in <trader.Scope object at 0x10c72cf90> learning
+2016-02-28 12:36:04,355 - flow - INFO - Initializing Executive...
+2016-02-28 12:36:05,489 - flow - INFO - Loading data complete
+2016-02-28 12:36:05,490 - flow - INFO - Scopes generated
+2016-02-28 12:36:05,490 - flow - INFO - Running...
+2016-02-28 12:36:05,490 - flow - INFO - Quotes fetched
+2016-02-28 12:36:05,490 - flow - INFO - Trade 1
+2016-02-28 12:36:05,490 - flow - INFO - <trader.Agent object at 0x104ffcf90> in <trader.Scope object at 0x104ffcf50> learning
+2016-02-28 12:41:16,145 - flow - INFO - Initializing Executive...
+2016-02-28 12:41:17,268 - flow - INFO - Loading data complete
+2016-02-28 12:41:17,268 - flow - INFO - Scopes generated
+2016-02-28 12:41:17,268 - flow - INFO - Running...
+2016-02-28 12:41:17,268 - flow - INFO - Quotes fetched
+2016-02-28 12:41:17,268 - flow - INFO - Trade 1
+2016-02-28 12:41:17,268 - flow - INFO - <trader.Agent object at 0x10b276f50> in <trader.Scope object at 0x10b276ed0> learning
+2016-02-28 12:41:36,310 - flow - INFO - Initializing Executive...
+2016-02-28 12:41:37,506 - flow - INFO - Loading data complete
+2016-02-28 12:41:37,506 - flow - INFO - Scopes generated
+2016-02-28 12:41:37,506 - flow - INFO - Running...
+2016-02-28 12:41:37,506 - flow - INFO - Quotes fetched
+2016-02-28 12:41:37,506 - flow - INFO - Trade 1
+2016-02-28 12:41:37,507 - flow - INFO - <trader.Agent object at 0x103f58f50> in <trader.Scope object at 0x103f58ed0> learning
+2016-02-28 12:44:38,419 - flow - INFO - Initializing Executive...
+2016-02-28 12:44:39,580 - flow - INFO - Loading data complete
+2016-02-28 12:44:39,581 - flow - INFO - Scopes generated
+2016-02-28 12:44:39,581 - flow - INFO - Running...
+2016-02-28 12:44:39,581 - flow - INFO - Quotes fetched
+2016-02-28 12:44:39,581 - flow - INFO - Trade 1
+2016-02-28 12:44:39,582 - flow - INFO - <trader.Agent object at 0x10fabbf50> in <trader.Scope object at 0x10fabbed0> learning
+2016-02-28 12:44:39,582 - flow - INFO - buy opened by <trader.Agent object at 0x10fabbf50> in 1 learning.
+2016-02-28 12:44:39,582 - flow - INFO - <trader.Agent object at 0x10fabbf10> in <trader.Scope object at 0x10fabbf90> learning
+2016-02-28 12:44:39,582 - flow - INFO - buy opened by <trader.Agent object at 0x10fabbf10> in 100 learning.
+2016-02-28 12:44:39,582 - flow - INFO - <trader.Agent object at 0x10fad0050> in <trader.Scope object at 0x10fabbfd0> learning
+2016-02-28 12:44:39,582 - flow - INFO - buy opened by <trader.Agent object at 0x10fad0050> in 1000 learning.
+2016-02-28 12:44:39,583 - flow - INFO - <trader.Agent object at 0x10fad00d0> in <trader.Scope object at 0x10fad0090> learning
+2016-02-28 12:44:39,583 - flow - INFO - buy opened by <trader.Agent object at 0x10fad00d0> in 10 learning.
+2016-02-28 12:44:39,583 - flow - INFO - <trader.Agent object at 0x10fad0150> in <trader.Scope object at 0x10fad0110> learning
+2016-02-28 12:44:39,583 - flow - INFO - buy opened by <trader.Agent object at 0x10fad0150> in 50 learning.
+2016-02-28 12:44:39,583 - flow - INFO - <trader.Agent object at 0x10fad01d0> in <trader.Scope object at 0x10fad0190> learning
+2016-02-28 12:44:39,583 - flow - INFO - buy opened by <trader.Agent object at 0x10fad01d0> in 500 learning.
+2016-02-28 12:44:39,583 - flow - INFO - Quotes fetched
+2016-02-28 12:44:39,583 - flow - INFO - Trade 2
+2016-02-28 12:44:39,584 - flow - INFO - <trader.Agent object at 0x10fabbf50> in <trader.Scope object at 0x10fabbed0> learning
+2016-02-28 12:44:39,584 - flow - INFO - <trader.Agent object at 0x10fabbf10> in <trader.Scope object at 0x10fabbf90> learning
+2016-02-28 12:44:39,584 - flow - INFO - <trader.Agent object at 0x10fad0050> in <trader.Scope object at 0x10fabbfd0> learning
+2016-02-28 12:44:39,584 - flow - INFO - <trader.Agent object at 0x10fad00d0> in <trader.Scope object at 0x10fad0090> learning
+2016-02-28 12:44:39,584 - flow - INFO - <trader.Agent object at 0x10fad0150> in <trader.Scope object at 0x10fad0110> learning
+2016-02-28 12:44:39,584 - flow - INFO - <trader.Agent object at 0x10fad01d0> in <trader.Scope object at 0x10fad0190> learning
+2016-02-28 12:44:39,584 - flow - INFO - Quotes fetched
+2016-02-28 12:44:39,585 - flow - INFO - Trade 3
+2016-02-28 12:44:39,585 - flow - INFO - <trader.Agent object at 0x10fabbf50> in <trader.Scope object at 0x10fabbed0> learning
+2016-02-28 12:44:39,585 - flow - INFO - <trader.Agent object at 0x10fabbf10> in <trader.Scope object at 0x10fabbf90> learning
+2016-02-28 12:44:39,585 - flow - INFO - <trader.Agent object at 0x10fad0050> in <trader.Scope object at 0x10fabbfd0> learning
+2016-02-28 12:44:39,585 - flow - INFO - <trader.Agent object at 0x10fad00d0> in <trader.Scope object at 0x10fad0090> learning
+2016-02-28 12:44:39,585 - flow - INFO - <trader.Agent object at 0x10fad0150> in <trader.Scope object at 0x10fad0110> learning
+2016-02-28 12:44:39,585 - flow - INFO - <trader.Agent object at 0x10fad01d0> in <trader.Scope object at 0x10fad0190> learning
+2016-02-28 12:44:39,586 - flow - INFO - Quotes fetched
+2016-02-28 12:44:39,586 - flow - INFO - Trade 4
+2016-02-28 12:44:39,586 - flow - INFO - <trader.Agent object at 0x10fabbf50> in <trader.Scope object at 0x10fabbed0> learning
+2016-02-28 12:44:39,586 - flow - INFO - <trader.Agent object at 0x10fabbf10> in <trader.Scope object at 0x10fabbf90> learning
+2016-02-28 12:44:39,586 - flow - INFO - <trader.Agent object at 0x10fad0050> in <trader.Scope object at 0x10fabbfd0> learning
+2016-02-28 12:44:39,586 - flow - INFO - <trader.Agent object at 0x10fad00d0> in <trader.Scope object at 0x10fad0090> learning
+2016-02-28 12:44:39,586 - flow - INFO - <trader.Agent object at 0x10fad0150> in <trader.Scope object at 0x10fad0110> learning
+2016-02-28 12:44:39,587 - flow - INFO - <trader.Agent object at 0x10fad01d0> in <trader.Scope object at 0x10fad0190> learning
+2016-02-28 12:46:44,362 - flow - INFO - Initializing Executive...
+2016-02-28 12:46:45,565 - flow - INFO - Loading data complete
+2016-02-28 12:46:45,566 - flow - INFO - Scopes generated
+2016-02-28 12:46:45,566 - flow - INFO - Running...
+2016-02-28 12:46:45,566 - flow - INFO - Quotes fetched
+2016-02-28 12:46:45,566 - flow - INFO - Trade 1
+2016-02-28 12:46:45,566 - flow - INFO - <trader.Agent object at 0x110284f90> in <trader.Scope object at 0x110284f10> learning
+2016-02-28 12:46:45,567 - flow - INFO - buy opened by <trader.Agent object at 0x110284f90> in 1.
+2016-02-28 12:46:45,567 - flow - INFO - <trader.Agent object at 0x110284f50> in <trader.Scope object at 0x110284fd0> learning
+2016-02-28 12:46:45,567 - flow - INFO - buy opened by <trader.Agent object at 0x110284f50> in 100.
+2016-02-28 12:46:45,567 - flow - INFO - <trader.Agent object at 0x110299090> in <trader.Scope object at 0x110299050> learning
+2016-02-28 12:46:45,567 - flow - INFO - buy opened by <trader.Agent object at 0x110299090> in 1000.
+2016-02-28 12:46:45,567 - flow - INFO - <trader.Agent object at 0x110299110> in <trader.Scope object at 0x1102990d0> learning
+2016-02-28 12:46:45,568 - flow - INFO - buy opened by <trader.Agent object at 0x110299110> in 10.
+2016-02-28 12:46:45,568 - flow - INFO - <trader.Agent object at 0x110299190> in <trader.Scope object at 0x110299150> learning
+2016-02-28 12:46:45,568 - flow - INFO - buy opened by <trader.Agent object at 0x110299190> in 50.
+2016-02-28 12:46:45,568 - flow - INFO - <trader.Agent object at 0x110299210> in <trader.Scope object at 0x1102991d0> learning
+2016-02-28 12:46:45,568 - flow - INFO - buy opened by <trader.Agent object at 0x110299210> in 500.
+2016-02-28 12:46:45,568 - flow - INFO - Quotes fetched
+2016-02-28 12:46:45,568 - flow - INFO - Trade 2
+2016-02-28 12:46:45,569 - flow - INFO - <trader.Agent object at 0x110284f90> in <trader.Scope object at 0x110284f10> learning
+2016-02-28 12:46:45,569 - flow - INFO - <trader.Agent object at 0x110284f50> in <trader.Scope object at 0x110284fd0> learning
+2016-02-28 12:46:45,569 - flow - INFO - <trader.Agent object at 0x110299090> in <trader.Scope object at 0x110299050> learning
+2016-02-28 12:46:45,569 - flow - INFO - <trader.Agent object at 0x110299110> in <trader.Scope object at 0x1102990d0> learning
+2016-02-28 12:46:45,569 - flow - INFO - <trader.Agent object at 0x110299190> in <trader.Scope object at 0x110299150> learning
+2016-02-28 12:46:45,569 - flow - INFO - <trader.Agent object at 0x110299210> in <trader.Scope object at 0x1102991d0> learning
+2016-02-28 12:46:45,570 - flow - INFO - Quotes fetched
+2016-02-28 12:46:45,570 - flow - INFO - Trade 3
+2016-02-28 12:46:45,570 - flow - INFO - <trader.Agent object at 0x110284f90> in <trader.Scope object at 0x110284f10> learning
+2016-02-28 12:46:45,570 - flow - INFO - <trader.Agent object at 0x110284f50> in <trader.Scope object at 0x110284fd0> learning
+2016-02-28 12:46:45,570 - flow - INFO - <trader.Agent object at 0x110299090> in <trader.Scope object at 0x110299050> learning
+2016-02-28 12:46:45,570 - flow - INFO - <trader.Agent object at 0x110299110> in <trader.Scope object at 0x1102990d0> learning
+2016-02-28 12:46:45,571 - flow - INFO - <trader.Agent object at 0x110299190> in <trader.Scope object at 0x110299150> learning
+2016-02-28 12:46:45,571 - flow - INFO - <trader.Agent object at 0x110299210> in <trader.Scope object at 0x1102991d0> learning
+2016-02-28 12:46:45,571 - flow - INFO - Quotes fetched
+2016-02-28 12:46:45,571 - flow - INFO - Trade 4
+2016-02-28 12:46:45,571 - flow - INFO - <trader.Agent object at 0x110284f90> in <trader.Scope object at 0x110284f10> learning
+2016-02-28 12:46:45,572 - flow - INFO - <trader.Agent object at 0x110284f50> in <trader.Scope object at 0x110284fd0> learning
+2016-02-28 12:46:45,572 - flow - INFO - <trader.Agent object at 0x110299090> in <trader.Scope object at 0x110299050> learning
+2016-02-28 12:46:45,572 - flow - INFO - <trader.Agent object at 0x110299110> in <trader.Scope object at 0x1102990d0> learning
+2016-02-28 12:46:45,572 - flow - INFO - <trader.Agent object at 0x110299190> in <trader.Scope object at 0x110299150> learning
+2016-02-28 12:46:45,572 - flow - INFO - <trader.Agent object at 0x110299210> in <trader.Scope object at 0x1102991d0> learning

@@ -7,7 +7,7 @@ LOG_FILE = 'logs/runlog.log'
 SCOPES = {1, 10, 50, 100, 500, 1000}
 Q = dict()
 ALPHA = 0.5
-REWARD = 1
+REWARD = tuple()
 DISCOUNT = 0.5
 
 class Executive(object):
