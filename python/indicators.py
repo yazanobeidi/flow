@@ -2,7 +2,7 @@
 class Indicators(object):
     def __init__(self, log=None):
         self.logger = log
-        self.state = (0,0,0,0,0,0,0,0)
+        self.state = (0,0,0,0,0,0,0,0,0)
         
     def get_states(self, quotes):
         self.quotes = quotes
@@ -23,7 +23,7 @@ class Indicators(object):
         ema = 0.0
         for value in sliced:
             ema = (multiplier*value) + ((1-multiplier)*ema)
-        print ema
+        #print ema
         if (ema == 0 and sum(sliced) != 0):
             print("WE GOT A EMA PROBLEM MAWFUCKA")
         return ema

@@ -1,3 +1,5 @@
+import random
+
 class QLearn():
     def __init__(self, all_actions, state_size, alpha):
         self.alpha = alpha
@@ -8,7 +10,7 @@ class QLearn():
         """ 
         Simple evaluation of Q function
         """
-        return self.q.get(tuple(s, a), 0.0)
+        return self.q.get((tuple(s), a), 0.0)
 
     def get_action(self, s):
         """
@@ -29,13 +31,13 @@ class QLearn():
             if all_q_vals[i] > best_q_val:
                 best_q_val = all_q_vals[i]
                 best_index = i
-        return all_actions[best_index]
+        return self.all_actions[best_index]
 
     def updateQ(self, state, action, reward, value):
         """
         Apply update to Q functions lookup table based on the Q learning equation
         """
-        oldv = self.q.get(tuple(s, a), None)
+        oldv = self.q.get((tuple(s), a), None)
         if oldv is None:
             self.q[tuple(s, a)] = reward
         else:
