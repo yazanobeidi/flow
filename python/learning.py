@@ -1,4 +1,5 @@
-from indicators import indicators
+from indicators import Indicators
+
 class Learning(object):
     def __int__(self, q, alpha, reward, discount):
         self.q = dict()
