@@ -1,11 +1,9 @@
-import numpy
-
 # moving average cross crossovers                
 class Indicators(object):
     def __init__(self, log=None):
         self.logger = log
-        self.state = (int(), int(), int(), int(), int(), int(), int(), int())
-
+        self.state = (0,0,0,0,0,0,0,0)
+        
     def get_states(self, quotes):
         self.quotes = quotes
         self.state = (self.crossover_indicator(self.quotes, 5, 7),
@@ -57,12 +55,12 @@ class Indicators(object):
         return series
 
     def MACD_sig_line(self, q, m1, m2, m3):
-        self.MACD_series = self.MACD_series(q, m1, m2)
-        if self.MACD(q, m1, m2) < self.moving_average(m3, self.MACD_series[-m2:]):
-            if self.MACD(q[:-1], m1, m2) > self.moving_average(m3, self.MACD_series[-m2-1:-1]):
+        MACD_series = self.MACD_series(q, m1, m2)
+        if self.MACD(q, m1, m2) < self.moving_average(m3, MACD_series[-m2:]):
+            if self.MACD(q[:-1], m1, m2) > self.moving_average(m3, MACD_series[-m2-1:-1]):
                 return -1
-        elif self.MACD(q, m1, m2) > self.moving_average(m3, self.MACD_series[-m2:]):
-            if self.MACD(q[:-1], m1, m2) < self.moving_average(m3, self.MACD_series[-m2-1:-1]):
+        elif self.MACD(q, m1, m2) > self.moving_average(m3, MACD_series[-m2:]):
+            if self.MACD(q[:-1], m1, m2) < self.moving_average(m3, MACD_series[-m2-1:-1]):
                 return 1
         return 0
 
@@ -87,7 +85,10 @@ class Indicators(object):
                 downdays[downcount] = q[1+i]
                 downcount += 1
             i += 1
-        RS = self.moving_average(period, updays) / self.moving_average(period, downdays)
+        try:
+            RS = self.moving_average(period, updays) / self.moving_average(period, downdays)
+        except:
+            RS = 0
         RSI = (100-(100/(1+RS)))
         
         if RSI < threshold:

@@ -1,6 +1,7 @@
 BUY = 'buy'
 SELL = 'sell'
 OPEN = 'open'
+ACTIONS = [1, -1, 0] # BUY, SELL, DO_NOTHING
 
 #action: buy/sell
 class Order(object):
@@ -15,8 +16,9 @@ class Order(object):
         self.action = action
         self.volume = volume
         self.open_cost = quote*volume
-        self.logger.info('{action} opened by {agent} in {scope}.'\
-                           .format(action=action, agent=self, scope=self.scope))
+        self.logger.info('{action} {volume} opened by {agent} in {scope}.'\
+                           .format(action=action, volume=volume,
+                                                  agent=self, scope=self.scope))
 
     def close_order(self, action, quote):
         self.close_profit = quote*volume
