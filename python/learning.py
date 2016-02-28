@@ -1,7 +1,5 @@
-from indicators import Indicators
-
 class Learning(object):
-    def __int__(self, q, alpha, reward, discount):
+    def __init__(self, q, alpha, reward, discount):
         self.q = q
         self.alpha = alpha
         self.reward = reward

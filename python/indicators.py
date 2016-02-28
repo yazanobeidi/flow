@@ -1,7 +1,10 @@
 # moving average cross crossovers                
-class Indicators():
-    def __init__(self, quotes):
-        self.quotes = quotes
+class Indicators(object):
+    def __init__(self, log=None):
+        self.logger = log
+
+    def get_states(self, quotes):
+        pass
 
     def update_quotes(self, quote):
         self.quotes.append(self.quote)

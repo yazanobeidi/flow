@@ -1,7 +1,6 @@
 from csv import reader
 import logging
-from trader import Scope, Agent
-from learning import Learning
+from trader import Scope
 
 QUOTES_CSV = 'data/DAT_NT_USDCAD_T_LAST_201601.csv'
 LOG_FILE = 'logs/runlog.log'
@@ -48,14 +47,16 @@ class Executive(object):
         reward = REWARD
         discount = DISCOUNT
         for scope in SCOPES:
-            self.scopes.append(Scope(scope, q, alpha, reward, discount))
+            self.scopes.append(Scope(scope, q, alpha, reward, discount, 
+                                                      self.quotes, self.logger))
         self.logger.info('Scopes generated')
 
     def get_new_quote(self, x):
-        self.logger.info('Fetching quote')
         new_quote = self.all_quotes[-x]
         self.quotes.append(new_quote)
-        self.agent.update(new_quote)
+        for scope in self.scopes:
+            scope.update(new_quote)
+        self.logger.info('Quotes fetched')
 
     def print_quotes(self):
         for quote in self.all_quotes:
