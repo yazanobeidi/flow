@@ -22,19 +22,24 @@ class Executive(object):
         self.load_scopes()
 
     def start(self):
+        self.logger.info('Running...')
+        hop = 1
         while self.run:
-            self.logger.info('Trade {}')
+            self.logger.info('Trade {}'.format(hop))
             for scope in self.scopes:
                 if not scope.agents:
                     self.logger.info('Adding agent to {}'.format(scope))
                     scope.add_agent()
             self.supervise()
             self.run = False # for debugging
+            hop += 1
 
     def supervise(self):
         for scope in self.scopes:
             agents = scope.get_agents()
             for agent in agents:
+                self.logger.info('{agent} in {scope} learning'.format(
+                                                      agent=agent, scope=scope))
                 agent.start_learning()
     
     def load_scopes(self):
