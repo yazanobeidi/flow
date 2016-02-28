@@ -2,13 +2,14 @@ from indicators import Indicators
 
 class Learning(object):
     def __int__(self, q, alpha, reward, discount):
-        self.q = dict()
-        self.alpha = int()
-        self.reward = int()
-        self.discount = int()
+        self.q = q
+        self.alpha = alpha
+        self.reward = reward
+        self.discount = discount
 
-    def learn(self, states, actions):
+    def learn(self, states):
         self.q[states] = self.Q(states)
+        return self.q[states]
 
     def get(self, s, default=0):
         try:

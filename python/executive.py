@@ -6,10 +6,10 @@ from learning import Learning
 QUOTES_CSV = 'data/DAT_NT_USDCAD_T_LAST_201601.csv'
 LOG_FILE = 'logs/runlog.log'
 SCOPES = {1, 10, 50, 100, 500, 1000}
-Q = 0
-ALPHA = 0
-REWARD = 0
-DISCOUNT = 0
+Q = dict()
+ALPHA = 0.5
+REWARD = 1
+DISCOUNT = 0.5
 
 class Executive(object):
     def __init__(self):
@@ -38,7 +38,6 @@ class Executive(object):
         for scope in self.scopes:
             agents = scope.get_agents()
             for agent in agents:
-                agent.
                 self.logger.info('{agent} in {scope} learning'.format(
                                                       agent=agent, scope=scope))
                 agent.start_learning()
@@ -54,7 +53,9 @@ class Executive(object):
 
     def get_new_quote(self, x):
         self.logger.info('Fetching quote')
-        self.quotes.append(self.all_quotes[-x])
+        new_quote = self.all_quotes[-x]
+        self.quotes.append(new_quote)
+        self.agent.update(new_quote)
 
     def print_quotes(self):
         for quote in self.all_quotes:
