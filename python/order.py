@@ -17,14 +17,15 @@ class Order(object):
         self.action = action
         self.volume = volume
         self.open_cost = quote*volume
+        self.bankroll.transaction(-self.open_cost)
         self.logger.info('{action} {volume} opened by {agent} in {scope}.'\
                            .format(action=action, volume=volume,
                                                   agent=self, scope=self.scope))
 
     def close_order(self, action, quote):
         self.close_profit = quote*self.volume
+        self.bankroll.transaction(self.close_profit)
         self.profit = self.close_profit - self.open_cost
-        self.bankroll.add_profit(self.profit)
         self.logger.info('{action} closed by {agent} in {scope}. '\
                          'Profit = ${profit}.'.format(action=action, agent=self,
                                           scope=self.scope, profit=self.profit))        

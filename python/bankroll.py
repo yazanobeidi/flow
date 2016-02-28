@@ -2,8 +2,8 @@ class Bankroll(object):
     def __init__(self):
         self.bankroll = 1000
 
-    def add_profit(self, profit):
-        self.bankroll += profit
+    def transaction(self, val):
+        self.bankroll += val
 
     def get_bankroll(self):
         return self.bankroll

@@ -80,7 +80,8 @@ class Agent(Learning, Indicators, Order):
         self.status['status'] = ''
 
     def update_performance(self, profit):
-        self.performance += profit / self.volume * self.num_trades
+        self.logger.info(self.performance)
+        self.performance += profit * self.num_trades
 
     def update(self, quote):
         self.quotes.append(quote)

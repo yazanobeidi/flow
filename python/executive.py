@@ -5,7 +5,7 @@ from bankroll import Bankroll
 
 QUOTES_CSV = 'data/DAT_NT_USDCAD_T_LAST_201601.csv'
 LOG_FILE = 'logs/runlog.log'
-SCOPES = {1, 10, 50, 100, 500, 1000}
+SCOPES = {1, 50, 1000}
 Q = dict()
 ALPHA = 0.5
 REWARD = tuple()
@@ -28,7 +28,7 @@ class Executive():
         while hop < len(self.all_quotes):
             self.logger.info('Bankroll: {}'.format(self.bankroll.get_bankroll()))
             self.get_new_quote(hop)
-            self.logger.info('Trade {}'.format(hop))
+            self.logger.info('Hop {}'.format(hop))
             for scope in self.scopes:
                 if not scope.agents:
                     self.logger.info('Adding agent to {}'.format(scope))
