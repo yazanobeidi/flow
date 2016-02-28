@@ -2,21 +2,24 @@
 class Indicators(object):
     def __init__(self, log=None):
         self.logger = log
+        self.state = (int(), int(), int(), int(), int(), int(), int(), int())
 
     def get_states(self, quotes):
-        pass
-
-    def update_quotes(self, quote):
-        self.quotes.append(self.quote)
-
-    def get_quotes(self, sampling=1):
-        return self.quotes[0::sampling]
+        self.quotes = quotes
+        self.state = (crossover_indicator,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0)
+        return self.state
 
     def moving_average(self, size, sliced):
         return sum(sliced)/size
 
     def crossover_indicator(self, x, y):
-        q = self.quotes
         if self.moving_average(x, q[-x:]) < self.moving_average(y, q[-y:]):
             if self.moving_average(x, q[-x-1:-1]) > self.moving_average(y, 
                                                                     q[-y-1:-1]):

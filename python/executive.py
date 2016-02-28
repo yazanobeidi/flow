@@ -39,7 +39,7 @@ class Executive(object):
             for agent in agents:
                 self.logger.info('{agent} in {scope} learning'.format(
                                                       agent=agent, scope=scope))
-                agent.start_learning()
+                agent.trade()
     
     def load_scopes(self):
         q = Q

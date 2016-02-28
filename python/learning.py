@@ -5,7 +5,7 @@ class Learning(object):
         self.reward = reward
         self.discount = discount
 
-    def learn(self, states):
+    def qlearn(self, states):
         self.q[states] = self.Q(states)
         return self.q[states]
 
@@ -20,4 +20,4 @@ class Learning(object):
         s type: tuple: qstatespace
         """
         return self.get(s) + self.alpha * (self.reward + self.discount * 
-                                                max(self.Q(s)) - self.get(s))
+                                                   max(self.Q(s)) - self.get(s))
