@@ -308,3 +308,39 @@
 2016-02-27 21:54:37,279 - flow - INFO - <trader.Agent object at 0x1072f6e10> in <trader.Scope object at 0x1072f6dd0> learning
 2016-02-27 21:54:37,279 - flow - INFO - <trader.Agent object at 0x1072f6e90> in <trader.Scope object at 0x1072f6e50> learning
 2016-02-27 21:54:37,279 - flow - INFO - <trader.Agent object at 0x1072f6f10> in <trader.Scope object at 0x1072f6ed0> learning
+2016-02-27 23:04:38,612 - flow - INFO - Initializing Executive...
+2016-02-27 23:04:39,825 - flow - INFO - Loading data complete
+2016-02-27 23:04:39,825 - flow - INFO - Scopes generated
+2016-02-27 23:04:39,825 - flow - INFO - Running...
+2016-02-27 23:04:39,826 - flow - INFO - Fetching quote
+2016-02-27 23:04:39,826 - flow - INFO - Trade 1
+2016-02-27 23:04:39,826 - flow - INFO - <trader.Agent object at 0x105d21cd0> in <trader.Scope object at 0x105d21c50> learning
+2016-02-27 23:04:39,826 - flow - INFO - <trader.Agent object at 0x105d21c90> in <trader.Scope object at 0x105d21d10> learning
+2016-02-27 23:04:39,826 - flow - INFO - <trader.Agent object at 0x105d21d90> in <trader.Scope object at 0x105d21d50> learning
+2016-02-27 23:04:39,827 - flow - INFO - <trader.Agent object at 0x105d21e10> in <trader.Scope object at 0x105d21dd0> learning
+2016-02-27 23:04:39,827 - flow - INFO - <trader.Agent object at 0x105d21e90> in <trader.Scope object at 0x105d21e50> learning
+2016-02-27 23:04:39,827 - flow - INFO - <trader.Agent object at 0x105d21f10> in <trader.Scope object at 0x105d21ed0> learning
+2016-02-27 23:04:39,827 - flow - INFO - Fetching quote
+2016-02-27 23:04:39,827 - flow - INFO - Trade 2
+2016-02-27 23:04:39,827 - flow - INFO - <trader.Agent object at 0x105d21cd0> in <trader.Scope object at 0x105d21c50> learning
+2016-02-27 23:04:39,827 - flow - INFO - <trader.Agent object at 0x105d21c90> in <trader.Scope object at 0x105d21d10> learning
+2016-02-27 23:04:39,828 - flow - INFO - <trader.Agent object at 0x105d21d90> in <trader.Scope object at 0x105d21d50> learning
+2016-02-27 23:04:39,828 - flow - INFO - <trader.Agent object at 0x105d21e10> in <trader.Scope object at 0x105d21dd0> learning
+2016-02-27 23:04:39,828 - flow - INFO - <trader.Agent object at 0x105d21e90> in <trader.Scope object at 0x105d21e50> learning
+2016-02-27 23:04:39,828 - flow - INFO - <trader.Agent object at 0x105d21f10> in <trader.Scope object at 0x105d21ed0> learning
+2016-02-27 23:04:39,828 - flow - INFO - Fetching quote
+2016-02-27 23:04:39,828 - flow - INFO - Trade 3
+2016-02-27 23:04:39,828 - flow - INFO - <trader.Agent object at 0x105d21cd0> in <trader.Scope object at 0x105d21c50> learning
+2016-02-27 23:04:39,828 - flow - INFO - <trader.Agent object at 0x105d21c90> in <trader.Scope object at 0x105d21d10> learning
+2016-02-27 23:04:39,829 - flow - INFO - <trader.Agent object at 0x105d21d90> in <trader.Scope object at 0x105d21d50> learning
+2016-02-27 23:04:39,829 - flow - INFO - <trader.Agent object at 0x105d21e10> in <trader.Scope object at 0x105d21dd0> learning
+2016-02-27 23:04:39,829 - flow - INFO - <trader.Agent object at 0x105d21e90> in <trader.Scope object at 0x105d21e50> learning
+2016-02-27 23:04:39,829 - flow - INFO - <trader.Agent object at 0x105d21f10> in <trader.Scope object at 0x105d21ed0> learning
+2016-02-27 23:04:39,829 - flow - INFO - Fetching quote
+2016-02-27 23:04:39,829 - flow - INFO - Trade 4
+2016-02-27 23:04:39,830 - flow - INFO - <trader.Agent object at 0x105d21cd0> in <trader.Scope object at 0x105d21c50> learning
+2016-02-27 23:04:39,830 - flow - INFO - <trader.Agent object at 0x105d21c90> in <trader.Scope object at 0x105d21d10> learning
+2016-02-27 23:04:39,830 - flow - INFO - <trader.Agent object at 0x105d21d90> in <trader.Scope object at 0x105d21d50> learning
+2016-02-27 23:04:39,830 - flow - INFO - <trader.Agent object at 0x105d21e10> in <trader.Scope object at 0x105d21dd0> learning
+2016-02-27 23:04:39,830 - flow - INFO - <trader.Agent object at 0x105d21e90> in <trader.Scope object at 0x105d21e50> learning
+2016-02-27 23:04:39,830 - flow - INFO - <trader.Agent object at 0x105d21f10> in <trader.Scope object at 0x105d21ed0> learning

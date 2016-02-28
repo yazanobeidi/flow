@@ -9,10 +9,16 @@ class Learning(object):
 
     def learn(self, states, actions):
         self.q[states] = self.Q(states)
-    
+
+    def get(self, s, default=0):
+        try:
+            return self.q[s]
+        except KeyError:
+            return default
+
     def Q(self, s):
         """
         s type: tuple: qstatespace
         """
-        return self.q[s] + self.alpha * (self.reward + self.discount * 
-                                                        max(self.Q(s)) - self.q)
+        return self.get(s) + self.alpha * (self.reward + self.discount * 
+                                                max(self.Q(s)) - self.get(s))
