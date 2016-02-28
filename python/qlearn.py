@@ -37,11 +37,11 @@ class QLearn():
         """
         Apply update to Q functions lookup table based on the Q learning equation
         """
-        oldv = self.q.get((tuple(s), a), None)
+        oldv = self.q.get((tuple(state), action), None)
         if oldv is None:
-            self.q[tuple(s, a)] = reward
+            self.q[(tuple(state), action)] = reward
         else:
-            self.q[tuple(s, a)] = oldv + self.alpha * (value - oldv)
+            self.q[(tuple(state), action)] = oldv + self.alpha * (value - oldv)
 
     def learnQ(self, state1, action, state2, reward):
         """ 
@@ -53,4 +53,4 @@ class QLearn():
             raise Exception('invalid state dim')
 
         best_q_new = max([self.Q(state2, a) for a in self.actions])
-        self.updateQ(state1, action, reward, reward + self.gamma * best_q_new)
+        self.updateQ(state1, action, reward, reward + self.alpha * best_q_new)

@@ -1,6 +1,7 @@
 from csv import reader
 import logging
 from trader import Scope
+from bankroll import Bankroll
 
 QUOTES_CSV = 'data/DAT_NT_USDCAD_T_LAST_201601.csv'
 LOG_FILE = 'logs/runlog.log'
@@ -10,10 +11,11 @@ ALPHA = 0.5
 REWARD = tuple()
 DISCOUNT = 0.5
 
-class Executive(object):
+class Executive():
     def __init__(self):
         self.init_logging()
         self.logger.info('Initializing Executive...')
+        self.bankroll = Bankroll()
         self.all_quotes = []
         self.quotes = []
         self.scopes = []
@@ -23,7 +25,8 @@ class Executive(object):
     def start(self):
         self.logger.info('Running...')
         hop = 1
-        while hop < 5:
+        while hop < len(self.all_quotes):
+            self.logger.info('Bankroll: {}'.format(self.bankroll.get_bankroll()))
             self.get_new_quote(hop)
             self.logger.info('Trade {}'.format(hop))
             for scope in self.scopes:
@@ -37,7 +40,7 @@ class Executive(object):
         for scope in self.scopes:
             agents = scope.get_agents()
             for agent in agents:
-                self.logger.info('{agent} in {scope} is learning'.format(
+                self.logger.debug('{agent} in {scope} is learning'.format(
                                                       agent=agent, scope=scope))
                 agent.trade()
     
@@ -48,7 +51,7 @@ class Executive(object):
         discount = DISCOUNT
         for scope in SCOPES:
             self.scopes.append(Scope(scope, q, alpha, reward, discount, 
-                                                      self.quotes, self.logger))
+                                       self.quotes, self.bankroll, self.logger))
         self.logger.info('Scopes generated')
 
     def get_new_quote(self, x):
@@ -72,7 +75,7 @@ class Executive(object):
     def init_logging(self):
         self.logger = logging.getLogger('flow')
         self.logger.setLevel(logging.DEBUG)
-        fh = logging.FileHandler(LOG_FILE)
+        fh = logging.FileHandler(LOG_FILE, mode='w')
         fh.setLevel(logging.DEBUG)
         ch = logging.StreamHandler()
         ch.setLevel(logging.INFO)
