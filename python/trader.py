@@ -49,12 +49,13 @@ class Agent(Learning, Indicators, Order):
 
     def trade(self):
         response = self.learn()
-        if response > 0:
+        self.logger.info('response is {}'.format(response))
+        if response == 1:
             if self.status is not OPEN:
                 self.open_position(order=BUY)
             elif self.status is BUY:
                 self.close_position()
-        elif response < 0:
+        elif response == -1:
             if self.status is not OPEN:
                 self.open_position(order=SELL)
             elif self.status is SELL:

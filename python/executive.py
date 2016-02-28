@@ -37,7 +37,7 @@ class Executive(object):
         for scope in self.scopes:
             agents = scope.get_agents()
             for agent in agents:
-                self.logger.info('{agent} in {scope} learning'.format(
+                self.logger.info('{agent} in {scope} is learning'.format(
                                                       agent=agent, scope=scope))
                 agent.trade()
     
