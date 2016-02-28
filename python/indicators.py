@@ -23,7 +23,7 @@ class Indicators(object):
         ema = 0.0
         for value in sliced:
             ema = (multiplier*value) + ((1-multiplier)*ema)
-
+        print ema
         if (ema == 0 and sum(sliced) != 0):
             print("WE GOT A EMA PROBLEM MAWFUCKA")
         return ema
@@ -56,13 +56,13 @@ class Indicators(object):
         return series
 
     def MACD_sig_line(self, q, m1, m2, m3):
-        MACD_series = self.MACD_series(q, m1, m2)
-        if self.MACD(q, m1, m2) < self.moving_average(m3, MACD_series[-m2:]):
-            if self.MACD(q[:-1], m1, m2) > self.moving_average(m3, MACD_series[-m2-1:-1]):
-                return -1
-        elif self.MACD(q, m1, m2) > self.moving_average(m3, MACD_series[-m2:]):
-            if self.MACD(q[:-1], m1, m2) < self.moving_average(m3, MACD_series[-m2-1:-1]):
         self.series = self.MACD_series(q, m1, m2)
+        if self.MACD(q, m1, m2) < self.moving_average(m3, self.series[-m2:]):
+            if self.MACD(q[:-1], m1, m2) > self.moving_average(m3, self.series[-m2-1:-1]):
+                return -1
+        elif self.MACD(q, m1, m2) > self.moving_average(m3, self.series[-m2:]):
+            if self.MACD(q[:-1], m1, m2) < self.moving_average(m3, self.series[-m2-1:-1]):
+                self.series = self.MACD_series(q, m1, m2)
         if self.MACD(q, m1, m2) < self.moving_average(m3, self.series[-m2:]):
             if self.MACD(q[:-1], m1, m2) > self.moving_average(m3, self.series[-m2-1:-1]):
                 return -1
