@@ -45,6 +45,7 @@ class Agent(Learning, Indicators, Order):
         self.states = self.get_states(self.quotes)
         if self.prev_states is not None: 
             return self.get_action(self.states)
+        return None
 
     def trade(self):
         response = self.learn()

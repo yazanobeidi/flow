@@ -5,7 +5,9 @@ class QLearn():
         self.state_sz = state_size
 
     def Q(self, s, a):
-        """ simple evaluation of Q function"""
+        """ 
+        Simple evaluation of Q function
+        """
         return self.q.get(tuple(s, a), 0.0)
 
     def get_action(self, s):
@@ -30,8 +32,9 @@ class QLearn():
         return all_actions[best_index]
 
     def updateQ(self, state, action, reward, value):
-        """code to apply update to Q functions lookup table
-           based on the Q learning equation"""
+        """
+        Apply update to Q functions lookup table based on the Q learning equation
+        """
         oldv = self.q.get(tuple(s, a), None)
         if oldv is None:
             self.q[tuple(s, a)] = reward
@@ -40,9 +43,8 @@ class QLearn():
 
     def learnQ(self, state1, action, state2, reward):
         """ 
-        This function will update the Q function to respond
-            the actions impact on state1 to state2 based on
-            the given reward
+        This function will update the Q function to respond the actions impact 
+            on state1 to state2 based on the given reward
         """
 
         if len(state1) != self.state_sz or len(state2) != self.state_sz:
