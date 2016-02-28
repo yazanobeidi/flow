@@ -3,6 +3,9 @@ class Indicators():
     def __init__(self, quotes):
         self.quotes = quotes
 
+    def update_quotes(self, quote):
+        self.quotes.append(self.quote)
+
     def get_quotes(self, sampling=1):
         return self.quotes[0::sampling]
 
