@@ -12,10 +12,12 @@ class Indicators():
     def crossover_indicator(self, x, y):
         q = self.quotes
         if self.moving_average(x, q[-x:]) < self.moving_average(y, q[-y:]):
-            if self.moving_average(x, q[-x-1:-1]) > self.moving_average(y, q[-y-1:-1]):
+            if self.moving_average(x, q[-x-1:-1]) > self.moving_average(y, 
+                                                                    q[-y-1:-1]):
                 return 1
         elif self.moving_average(x, q[-x:]) > self.moving_average(y, q[-y:]):
-            if self.moving_average(x, q[-x-1:-1]) < self.moving_average(y, q[-y-1:-1]):
+            if self.moving_average(x, q[-x-1:-1]) < self.moving_average(y, 
+                                                                    q[-y-1:-1]):
                 return -1
         return 0
 

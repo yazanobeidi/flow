@@ -15,23 +15,23 @@ class Executive(object):
     def __init__(self):
         self.init_logging()
         self.logger.info('Initializing Executive...')
+        self.all_quotes = []
         self.quotes = []
         self.scopes = []
-        self.run = True
         self.load_csv()
         self.load_scopes()
 
     def start(self):
         self.logger.info('Running...')
         hop = 1
-        while self.run:
+        while hop < 5:
+            self.get_new_quote(hop)
             self.logger.info('Trade {}'.format(hop))
             for scope in self.scopes:
                 if not scope.agents:
                     self.logger.info('Adding agent to {}'.format(scope))
                     scope.add_agent()
             self.supervise()
-            self.run = False # for debugging
             hop += 1
 
     def supervise(self):
@@ -51,15 +51,19 @@ class Executive(object):
             self.scopes.append(Scope(scope, q, alpha, reward, discount))
         self.logger.info('Scopes generated')
 
+    def get_new_quote(self, x):
+        self.logger.info('Fetching quote')
+        self.quotes.append(self.all_quotes[-x])
+
     def print_quotes(self):
-        for quote in self.quotes:
+        for quote in self.all_quotes:
             print quote
 
     def load_csv(self):
         with open(QUOTES_CSV) as csvfile:
             quotes = reader(csvfile, delimiter=';', quotechar='|')
             for quote in quotes:
-                 self.quotes.append(float(quote[-2]))
+                 self.all_quotes.append(float(quote[-2]))
             self.logger.info('Loading data complete')
 
     def init_logging(self):
