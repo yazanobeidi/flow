@@ -2,10 +2,11 @@
 class Indicators(object):
     def __init__(self, log=None):
         self.logger = log
-        self.state = (0,0,0,0,0,0,0,0,0)
+        self.state = (0,0,0,0,0,0,0,0,0,0)
         
     def get_states(self, quotes):
         self.quotes = quotes
+        #print len(quotes)
         self.state = (self.crossover_indicator(self.quotes, 5, 7),
                       self.crossover_indicator(self.quotes, 5, 20),
                       self.crossover_indicator(self.quotes, 7, 30),
@@ -14,7 +15,9 @@ class Indicators(object):
                       self.crossover_indicator(self.quotes, 50, 200),
                       self.MACD_sig_line(self.quotes, 12, 26, 9),
                       self.MACD_zero_cross(self.quotes, 12, 26),
+                      self.MACD_trend(self.quotes, 12, 26, 9),
                       self.RSI(self.quotes, 14, 25))
+        self.logger.debug('State: {}'.format(self.state))
         return self.state
 
     def moving_average(self, size, sliced):
@@ -23,20 +26,28 @@ class Indicators(object):
         ema = 0.0
         for value in sliced:
             ema = (multiplier*value) + ((1-multiplier)*ema)
+        #print size
         #print ema
         if (ema == 0 and sum(sliced) != 0):
             print("WE GOT A EMA PROBLEM MAWFUCKA")
         return ema
 
     def crossover_indicator(self, q, x, y):
+        #print("if current x less than y")
         if self.moving_average(x, q[-x:]) < self.moving_average(y, q[-y:]):
+            #print "if prev x greater than y"
             if self.moving_average(x, q[-x-1:-1]) > self.moving_average(y, 
                                                                     q[-y-1:-1]):
+                #print -1 
                 return -1
+        
         elif self.moving_average(x, q[-x:]) > self.moving_average(y, q[-y:]):
+            #print "if prev x less than y"
             if self.moving_average(x, q[-x-1:-1]) < self.moving_average(y, 
                                                                     q[-y-1:-1]):
+                #print 1
                 return 1
+        #print 0
         return 0
 
 #https://en.wikipedia.org/wiki/MACD#Mathematical_interpretation
@@ -109,6 +120,15 @@ class Indicators(object):
         elif RSI > (100-threshold):
             return -1
         return 0
+
+    def MACD_trend(self, q, m1, m2, m3):
+        self.series = self.MACD_series(q, m1, m2)
+        if self.MACD(q, m1, m2) < self.moving_average(m3, self.series[-m2:]):
+            return -1
+        elif self.MACD(q, m1, m2) > self.moving_average(m3, self.series[-m2:]):
+            return 1
+        return 0
+
     
                 
                 

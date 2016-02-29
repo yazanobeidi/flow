@@ -3,13 +3,17 @@ import logging
 from trader import Scope
 from bankroll import Bankroll
 
-QUOTES_CSV = 'data/DAT_NT_USDCAD_T_LAST_201601.csv'
-LOG_FILE = 'logs/runlog.log'
-SCOPES = {1, 50, 1000}
+QUOTES_CSV = '../data/DAT_NT_USDCAD_T_LAST_201601.csv'
+LOG_FILE = '../logs/runlog.log'
+#SCOPES = {10, 50, 100, 500, 3600, 14400}
+#scopenum = [10, 50, 100, 500, 3600, 14400]
+SCOPES = {100}
+scopenum = [100]
 Q = dict()
 ALPHA = 0.5
 REWARD = tuple()
 DISCOUNT = 0.5
+ALL_profit = []
 
 class Executive():
     def __init__(self):
@@ -24,42 +28,63 @@ class Executive():
 
     def start(self):
         self.logger.info('Running...')
-        hop = 1
-        while hop < len(self.all_quotes):
-            self.logger.info('Bankroll: {}'.format(self.bankroll.get_bankroll()))
-            self.get_new_quote(hop)
-            self.logger.info('Hop {}'.format(hop))
+        self.hop = 1
+        while self.hop < len(self.all_quotes):
+            #self.logger.info('Bankroll: {}'.format(self.bankroll.get_bankroll()))
+            self.get_new_quote(self.hop)
+            self.logger.debug('Quote {}'.format(self.hop))
             for scope in self.scopes:
                 if not scope.agents:
                     self.logger.info('Adding agent to {}'.format(scope))
                     scope.add_agent()
+                else:
+                    i = 0
+                    for agent in scope.agents:
+                        if agent.status['status'] != 'open':
+                            i += 1;
+                    #if i == 0:
+                        #self.logger.info('Adding agent to {}'.format(scope))
+                        #scope.add_agent(scope, Q, ALPHA, REWARD, DISCOUNT, self.quotes, self.bankroll)
+
             self.supervise()
-            hop += 1
+            self.hop += 1
+        for i in len(self.all_profit)-1:
+            self.logger.info('Ave. Profit:'.format(sum(self.all_profit)/len(self.all_profit)))
+            self.logger.info('{}'.format(self.all_profit[i]))
+
+
 
     def supervise(self):
         for scope in self.scopes:
             agents = scope.get_agents()
+            i = 0
             for agent in agents:
-                self.logger.debug('{agent} in {scope} is learning'.format(
-                                                      agent=agent, scope=scope))
-                agent.trade()
+                if agent.status['status'] != 'open'
+                i+=1
+            if i > 0:
+                scope.add_agent()
     
     def load_scopes(self):
         q = Q
         alpha = ALPHA
         reward = REWARD
         discount = DISCOUNT
+        self.all_profit = ALL_profit
         for scope in SCOPES:
             self.scopes.append(Scope(scope, q, alpha, reward, discount, 
-                                       self.quotes, self.bankroll, self.logger))
+                                       self.quotes, self.bankroll, self.all_profit, self.logger))
         self.logger.info('Scopes generated')
 
     def get_new_quote(self, x):
         new_quote = self.all_quotes[-x]
         self.quotes.append(new_quote)
+        i = 0
         for scope in self.scopes:
-            scope.update(new_quote)
-        self.logger.info('Quotes fetched')
+            if self.hop%scopenum[i] == 0:
+                self.logger.debug('Updating Scope {num}'.format(num=scopenum[i]))
+                scope.update(new_quote)
+            i+=1
+        #self.logger.info('Quotes fetched')
 
     def print_quotes(self):
         for quote in self.all_quotes:
