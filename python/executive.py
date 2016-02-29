@@ -48,7 +48,7 @@ class Executive():
 
             self.supervise()
             self.hop += 1
-        for i in len(self.all_profit)-1:
+        for i in range(len(self.all_profit)-1):
             self.logger.info('Ave. Profit:'.format(sum(self.all_profit)/len(self.all_profit)))
             self.logger.info('{}'.format(self.all_profit[i]))
 
@@ -57,12 +57,12 @@ class Executive():
     def supervise(self):
         for scope in self.scopes:
             agents = scope.get_agents()
-            i = 0
-            for agent in agents:
-                if agent.status['status'] != 'open'
-                i+=1
-            if i > 0:
-                scope.add_agent()
+            #i = 0
+            #for agent in agents:
+            #    if agent.status['status'] != 'open':
+            #        i+=1
+            #if i > 0:
+            #    scope.add_agent()
     
     def load_scopes(self):
         q = Q
