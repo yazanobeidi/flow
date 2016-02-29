@@ -3,8 +3,8 @@ import logging
 from trader import Scope
 from bankroll import Bankroll
 
-QUOTES_CSV = '../data/DAT_NT_USDCAD_T_LAST_201601.csv'
-LOG_FILE = '../logs/runlog.log'
+QUOTES_CSV = 'data/DAT_NT_USDCAD_T_LAST_201601.csv'
+LOG_FILE = 'logs/runlog.log'
 #SCOPES = {10, 50, 100, 500, 3600, 14400}
 #scopenum = [10, 50, 100, 500, 3600, 14400]
 SCOPES = {100}
@@ -57,12 +57,10 @@ class Executive():
     def supervise(self):
         for scope in self.scopes:
             agents = scope.get_agents()
-            #i = 0
-            #for agent in agents:
-            #    if agent.status['status'] != 'open':
-            #        i+=1
-            #if i > 0:
-            #    scope.add_agent()
+            for agent in agents:
+                #self.logger.debug('{agent} in {scope} is learning'.format(
+                #                                      agent=agent, scope=scope))
+                agent.trade()
     
     def load_scopes(self):
         q = Q

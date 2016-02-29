@@ -22,14 +22,10 @@ class Indicators(object):
 
     def moving_average(self, size, sliced):
         multiplier = 0.0
-        multiplier = float((2/(float(size) + 1)))
-        ema = 0.0
+        multiplier = 2/(float(size) + 1)
+        ema = sum(sliced)/float(size)
         for value in sliced:
             ema = (multiplier*value) + ((1-multiplier)*ema)
-        #print size
-        #print ema
-        if (ema == 0 and sum(sliced) != 0):
-            print("WE GOT A EMA PROBLEM MAWFUCKA")
         return ema
 
     def crossover_indicator(self, q, x, y):
