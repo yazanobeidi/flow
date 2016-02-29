@@ -18,8 +18,8 @@ class Order(object):
         self.volume = volume
         self.open_cost = quote*volume
         self.bankroll.transaction(-self.open_cost)
-        self.logger.info('{action} {volume} opened by {agent} in {scope}.'\
-                           .format(action=action, volume=volume,
+        self.logger.info('{volume} {action} opened by {agent} in {scope}.'\
+                                        .format(action=action, volume=volume,
                                                   agent=self, scope=self.scope))
 
     def close_order(self, action, quote):
