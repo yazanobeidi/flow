@@ -128,7 +128,7 @@ class Agent(Learning, Indicators, Order):
         profit = self.get_profit()
         self.learnQ(self.states, self.status['action'], self.prev_states, profit)
         self.update_performance(profit)
-        self.status['status'] = ''
+        self.status['status'] = 'idle'
 
     def update_performance(self, profit):
         self.performance += profit * self.volume * self.num_trades

@@ -14,7 +14,7 @@ Q = dict()
 ALPHA = 0.7
 REWARD = tuple()
 DISCOUNT = 0.314
-LIMIT = 20
+LIMIT = 11
 
 class Executive():
     """
