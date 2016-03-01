@@ -109,12 +109,12 @@ class Agent(Learning, Indicators, Order):
         if response is 1:
             if self.status['status'] is not OPEN:
                 self.open_position(order=BUY)
-            elif self.status['action'] is BUY:
+            elif self.status['action'] is SELL:
                 self.close_position()
         elif response is -1:
             if self.status['status'] is not OPEN:
                 self.open_position(order=SELL)
-            elif self.status['action'] is SELL:
+            elif self.status['action'] is BUY:
                 self.close_position()
 
     def open_position(self, order):
