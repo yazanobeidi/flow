@@ -34,26 +34,22 @@ class Executive():
         self.load_csv()
         self.load_scopes()
 
-    def start(self):
-        self.logger.info('Running HFSFT...')
+    def supervise(self):
+        self.logger.info('Running...')
         hop = 0
         while hop < len(self.all_quotes):
             self.logger.info('Hop {hop} Bankroll: {bankroll}'.format(hop=hop, 
                                         bankroll=self.bankroll.get_bankroll()))
             self.get_new_quote(hop)
-            for scope in self.scopes:
-                if not scope.agents:
+            for scope in self.get_active_scopes(hop):
+                if not scope.free_agents():
                     self.logger.info('Adding agent to {}'.format(scope))
                     scope.add_agent()
-            self.supervise(hop)
+                agents = scope.get_agents()
+                self.logger.info('{} agents active'.format(len(agents)))
+                for agent in agents:
+                    agent.trade()
             hop += 1
-
-    def supervise(self, hop):
-        for scope in self.get_active_scopes(hop):
-            agents = scope.get_agents()
-            self.logger.info('{} agents active'.format(len(agents)))
-            for agent in agents:
-                agent.trade()
     
     def get_active_scopes(self, hop):
         """
@@ -108,6 +104,4 @@ class Executive():
 
 if __name__ == "__main__":
     trader = Executive()
-    trader.start()
-    #trader.print_quotes()
-    
+    trader.supervise()

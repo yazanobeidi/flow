@@ -11,14 +11,19 @@ class Scope(object):
     def __init__(self, scope, q, alpha, reward, discount, quotes, 
                                                                  bankroll, log):
         self.scope = scope
+        self.q = q
+        self.alpha = alpha
+        self.reward = reward
+        self.discount = discount
+        self.bankroll = bankroll
         self.logger = log
         self.quotes = quotes
         self.agents = [Agent(self.scope, q, alpha, reward, discount, quotes, 
                                                          bankroll, self.logger)]
 
-    def add_agent(self, q, alpha, reward, discount, quotes, bankroll, log):
-        self.agents.append(Agent(self.scope, q, alpha, reward, discount, 
-                                                 quotes, bankroll, self.logger))
+    def add_agent(self):
+        self.agents.append(Agent(self.scope, self.q, self.alpha, self.reward, 
+                        self.discount, self.quotes, self.bankroll, self.logger))
 
     def get_agents(self):
         return self.agents
@@ -27,6 +32,14 @@ class Scope(object):
         for agent in self.agents:
             agent.update(quote)
 
+    def free_agents(self):
+        """
+        Returns true if at least one agent has no open positions.
+        """
+        for agent in self.agents:
+            if agent.status['status'] is not OPEN:
+                return True
+        return False
 
 class Agent(Learning, Indicators, Order):
     """
