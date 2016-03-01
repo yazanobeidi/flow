@@ -14,6 +14,7 @@ Q = dict()
 ALPHA = 0.7
 REWARD = tuple()
 DISCOUNT = 0.314
+LIMIT = 20
 
 class Executive():
     """
@@ -39,19 +40,14 @@ class Executive():
         hop = 0
         while hop < len(self.all_quotes):
             self.logger.info('Hop {hop} Bankroll: {bankroll}'.format(hop=hop, 
-                                        bankroll=self.bankroll.get_bankroll()))
-            self.get_new_quote(hop)
-            for scope in self.get_active_scopes(hop):
-                if not scope.free_agents():
-                    self.logger.info('Adding agent to {}'.format(scope))
-                    scope.add_agent()
-                agents = scope.get_agents()
-                self.logger.info('{} agents active'.format(len(agents)))
-                for agent in agents:
-                    agent.trade()
+                                         bankroll=self.bankroll.get_bankroll()))
+            new_quote = self.get_new_quote(hop)
+            for scope in self.active_scopes(hop):
+                scope.refresh(new_quote)
+                scope.trade()
             hop += 1
     
-    def get_active_scopes(self, hop):
+    def active_scopes(self, hop):
         """
         Generator of active scopes for a given hop.
         """
@@ -60,21 +56,16 @@ class Executive():
                 yield scope
 
     def load_scopes(self):
-        q = Q
-        alpha = ALPHA
-        reward = REWARD
-        discount = DISCOUNT
         for scope in SCOPES:
-            self.scopes.append(Scope(scope, q, alpha, reward, discount, 
+            self.scopes.append(Scope(scope, Q, ALPHA, REWARD, DISCOUNT, LIMIT,
                                        self.quotes, self.bankroll, self.logger))
         self.logger.info('Scopes generated')
 
     def get_new_quote(self, x):
         new_quote = self.all_quotes[-x]
         self.quotes.append(new_quote)
-        for scope in self.get_active_scopes(x):
-            scope.update(new_quote)
         self.logger.info('Quotes fetched')
+        return new_quote
 
     def print_quotes(self):
         for quote in self.all_quotes:

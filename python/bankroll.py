@@ -19,6 +19,8 @@ class Bankroll(object):
         self.transactions += 1
         self.logger.info('Transaction {id}: $ {val} added to bankroll: $ {br}'\
                     .format(id=self.transactions, val=val, br=self.bankroll))
+        if self.bankroll < 0:
+            raise Exception('We ran out of money')
 
     def get_bankroll(self):
         return self.bankroll

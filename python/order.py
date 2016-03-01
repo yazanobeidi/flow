@@ -31,9 +31,9 @@ class Order(object):
         self.close_profit = quote*self.volume
         self.bankroll.transaction(self.close_profit)
         self.profit = self.close_profit - self.open_cost
-        self.logger.info('{action} closed by {agent} in {scope}. '\
+        self.logger.info('{volume} {action} closed by {agent} in {scope}. '\
                          'Profit = ${profit}.'.format(action=action, agent=self,
-                                          scope=self.scope, profit=self.profit))        
+                      volume=self.volume, scope=self.scope, profit=self.profit))        
     def get_profit(self):
         return self.profit
 

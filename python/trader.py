@@ -8,7 +8,7 @@ class Scope(object):
     """
     A scope is a resolution in time of quotes and has a collection of agents.
     """
-    def __init__(self, scope, q, alpha, reward, discount, quotes, 
+    def __init__(self, scope, q, alpha, reward, discount, limit, quotes, 
                                                                  bankroll, log):
         self.scope = scope
         self.q = q
@@ -18,10 +18,12 @@ class Scope(object):
         self.bankroll = bankroll
         self.logger = log
         self.quotes = quotes
+        self.limit = limit
         self.agents = [Agent(self.scope, q, alpha, reward, discount, quotes, 
                                                          bankroll, self.logger)]
 
     def add_agent(self):
+        self.logger.info('Adding agent to {}'.format(self.scope))
         self.agents.append(Agent(self.scope, self.q, self.alpha, self.reward, 
                         self.discount, self.quotes, self.bankroll, self.logger))
 
@@ -32,12 +34,37 @@ class Scope(object):
         for agent in self.agents:
             agent.update(quote)
 
+    def trade(self):
+        for agent in self.agents:
+            agent.trade()
+
+    def refresh(self, new_quote):
+        """
+        Performs actions to update scope state on a new hop:
+            Update quotes: Agent.update(new_quote)
+            Fire agents with poor performance: Agent.remove()
+            Spawn new agent if none are idle: self.add_agent
+        """
+        none_are_idle = True
+        #self.agents[:] = [agent for agent in self.agents if agent.performance < 1]
+        # the above line should work but to avoid iterating through self.agents
+        # twice I would like to try doing the following:
+        for agent in self.agents[:]:
+            agent.update(new_quote)
+            if agent.status['status'] is 'idle':
+                none_are_idle = False
+            elif agent.performance < 1:
+                self.agents.remove(agent)
+        if none_are_idle and len(self.agents) < self.limit:
+            self.add_agent()
+            self.logger.info('{} agents active'.format(len(self.agents)))
+
     def free_agents(self):
         """
-        Returns true if at least one agent has no open positions.
+        Returns true iff at least one agent has no open positions.
         """
         for agent in self.agents:
-            if agent.status['status'] is not OPEN:
+            if agent.status['status'] is 'idle':
                 return True
         return False
 
@@ -62,7 +89,7 @@ class Agent(Learning, Indicators, Order):
         self.performance = 1
         self.volume = max(self.performance, 1)
         self.logger = log
-        self.status = {'status':'','action':''}
+        self.status = {'status':'idle','action':''}
         self.quotes = quotes
         self.states = None
 
@@ -104,8 +131,7 @@ class Agent(Learning, Indicators, Order):
         self.status['status'] = ''
 
     def update_performance(self, profit):
-        self.logger.info(self.performance)
-        self.performance += profit / self.volume * self.num_trades
+        self.performance += profit * self.volume * self.num_trades
 
     def update(self, quote):
         self.quotes.append(quote)
