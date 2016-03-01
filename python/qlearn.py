@@ -1,5 +1,7 @@
 import random
 
+__author__ = 'micheal/yazan'
+
 class QLearn():
     def __init__(self, all_actions, state_size, alpha):
         self.alpha = alpha

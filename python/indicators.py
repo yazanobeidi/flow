@@ -1,5 +1,10 @@
+__author__ = 'matthew'
+
 # moving average cross crossovers                
 class Indicators(object):
+    """
+    This class defines financial indicators used to populate the state tuple.
+    """
     def __init__(self, log=None):
         self.logger = log
         self.state = (0,0,0,0,0,0,0,0,0)

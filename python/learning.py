@@ -1,7 +1,11 @@
-import random
 from qlearn import QLearn
 
+__author__ = 'yazan'
+
 class Learning(QLearn):
+    """
+    This class links all learning modules a trader might use together.
+    """
     def __init__(self, q, alpha, reward, discount, initial_state, actions):
         self.q = {}
         self.alpha = alpha

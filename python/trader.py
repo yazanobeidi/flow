@@ -2,12 +2,17 @@ from learning import Learning
 from indicators import Indicators
 from order import Order, BUY, SELL, OPEN, ACTIONS
 
+__author__ = 'yazan/matthew'
+
 class Scope(object):
+    """
+    A scope is a resolution in time of quotes and has a collection of agents.
+    """
     def __init__(self, scope, q, alpha, reward, discount, quotes, 
                                                                  bankroll, log):
         self.scope = scope
         self.logger = log
-        self.quotes = self.quotes(quotes)
+        self.quotes = quotes
         self.agents = [Agent(self.scope, q, alpha, reward, discount, quotes, 
                                                          bankroll, self.logger)]
 
@@ -22,20 +27,24 @@ class Scope(object):
         for agent in self.agents:
             agent.update(quote)
 
-    @staticmethod
-    def quotes(quotes, sampling=1):
-        return quotes[0::sampling]
-
 
 class Agent(Learning, Indicators, Order):
+    """
+    An agent's primarily role is to place good trades and learn from the
+        consequences of its actions. A good trade is one that profits, and good
+        trades raise the agent's performance. A higher performance results in a
+        greater trade volume for the agent. An agent holds at most a single
+        position at once.
+    """
     def __init__(self, scope, q, alpha, reward, discount, quotes, bankroll, 
                                                                       log=None):
         self.logger = log
-        self.actions = ACTIONS # BUY, SELL, DO_NOTHING
+        self.scope = scope
+        self.actions = ACTIONS
         Indicators.__init__(self, log)
+        Order.__init__(self, scope, bankroll, log)
         Learning.__init__(self, q, alpha, reward, discount, self.state, \
                                                                    self.actions)
-        Order.__init__(self, scope, bankroll, log)
         self.num_trades = 0
         self.performance = 1
         self.volume = max(self.performance, 1)
@@ -45,6 +54,8 @@ class Agent(Learning, Indicators, Order):
         self.states = None
 
     def learn(self):
+        self.logger.debug('{agent} in {scope} is learning'.format(
+                                                  agent=self, scope=self.scope))
         self.prev_states = self.states
         self.states = self.get_states(self.quotes)
         if self.prev_states is not None: 

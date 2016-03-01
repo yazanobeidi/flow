@@ -1,3 +1,5 @@
+__author__ = 'matthew/yazan'
+
 BUY = 'buy'
 SELL = 'sell'
 OPEN = 'open'
@@ -5,6 +7,9 @@ ACTIONS = [1, -1, 0] # BUY, SELL, DO_NOTHING
 
 #action: buy/sell
 class Order(object):
+    """
+    This class defines a single order and records details to bankroll and log.
+    """
     def __init__(self, scope, bankroll, log=None):
         self.bankroll = bankroll
         self.log = log
