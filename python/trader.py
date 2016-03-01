@@ -132,6 +132,8 @@ class Agent(Learning, Indicators, Order):
 
     def update_performance(self, profit):
         self.performance += profit * self.volume * self.num_trades
+        self.logger.info('{p} - {agent} performance:'.format(agent=self, 
+                                                            p=self.performance))
 
     def update(self, quote):
         self.quotes.append(quote)
