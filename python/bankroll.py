@@ -15,6 +15,9 @@ class Bankroll(object):
         self.logger.info('Bankroll initialized with $ {}'.format(funds))
 
     def transaction(self, val):
+        """
+        Commits and logs a transaction.
+        """
         self.bankroll += val
         self.transactions += 1
         self.logger.info('Transaction {id}: $ {val} added to bankroll: $ {br}'\
@@ -23,9 +26,15 @@ class Bankroll(object):
             raise Exception('We ran out of money')
 
     def get_bankroll(self):
+        """
+        Returns current value of bankroll.
+        """
         return self.bankroll
 
     def init_logging(self, log_file):
+        """
+        Logger initialization and boilerplate.
+        """
         self.logger = logging.getLogger('bankroll')
         self.logger.setLevel(logging.INFO)
         fh = logging.FileHandler(log_file, mode='w')

@@ -3,6 +3,10 @@ import random
 __author__ = 'micheal/yazan'
 
 class QLearn():
+    """
+    This class defines the Q Learning model free reinforcement learning 
+    algorithm, essentially mapping a state tuple to an optimal action.
+    """
     def __init__(self, all_actions, state_size, alpha):
         self.alpha = alpha
         self.all_actions = all_actions

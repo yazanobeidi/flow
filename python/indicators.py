@@ -4,12 +4,14 @@ __author__ = 'matthew'
 class Indicators(object):
     """
     This class defines financial indicators used to populate the state tuple.
+    #TODO: Perform indicators on a second, Kalman filtered, quotes trend
+    #TODO: connect Indicators with a log instance for debug and error reporting
     """
     def __init__(self, log=None):
         self.logger = log
         self.state = (0,0,0,0,0,0,0,0,0)
         
-    def get_states(self, quotes):
+    def get_current_state(self, quotes):
         self.quotes = quotes
         self.state = (self.crossover_indicator(self.quotes, 5, 7),
                       self.crossover_indicator(self.quotes, 5, 20),

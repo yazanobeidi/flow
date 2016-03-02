@@ -5,7 +5,6 @@ SELL = 'sell'
 OPEN = 'open'
 ACTIONS = [1, -1, 0] # BUY, SELL, DO_NOTHING
 
-#action: buy/sell
 class Order(object):
     """
     This class defines a single order and records details to bankroll and log.
@@ -19,6 +18,12 @@ class Order(object):
         self.profit = float()
         
     def open_order(self, action, quote, volume):
+        """
+        Opens an order and commits cost to bankroll and log.
+        :param: action: position type (BUY or SELL)
+        :param: quote: current openening price
+        :param: volume: order size
+        """
         self.action = action
         self.volume = volume
         self.open_cost = quote*volume
@@ -28,6 +33,12 @@ class Order(object):
                                                   agent=self, scope=self.scope))
 
     def close_order(self, action, quote):
+        """
+        Closes an order, commits transaction to bankroll and returns signed 
+            profit generated.
+        :param: action: position type (BUY or SELL)
+        :param: quote: current closing price
+        """
         self.close_profit = quote*self.volume
         self.bankroll.transaction(self.close_profit)
         self.profit = self.close_profit - self.open_cost
