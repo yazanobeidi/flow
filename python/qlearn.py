@@ -23,7 +23,7 @@ class QLearn():
             raise Exception('invalid state dim')
 
         # random actions are needed for learning to avoid local optimums
-        if random.random() < 0.10:
+        if random.random() < 0.07:
             return random.choice(self.all_actions)
 
         all_q_vals = [(action, self.Q(s, action)) for action in self.all_actions]

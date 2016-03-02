@@ -35,6 +35,10 @@ class Scope(object):
             agent.update(quote)
 
     def trade(self):
+        """
+        This function iterates through all agents within a scope instance and 
+            begins trading.
+        """
         for agent in self.agents:
             agent.trade()
 
@@ -54,10 +58,11 @@ class Scope(object):
             if agent.status['status'] is 'idle':
                 none_are_idle = False
             elif agent.performance < 1:
+                self.logger.info('Firing {}'.format(agent))
                 self.agents.remove(agent)
         if none_are_idle and len(self.agents) < self.limit:
             self.add_agent()
-            self.logger.info('{} agents active'.format(len(self.agents)))
+        self.logger.info('{} agents active'.format(len(self.agents)))
 
     def free_agents(self):
         """
@@ -86,8 +91,8 @@ class Agent(Learning, Indicators, Order):
         Learning.__init__(self, q, alpha, reward, discount, self.state, \
                                                                    self.actions)
         self.num_trades = 0
-        self.performance = 1
-        self.volume = max(self.performance, 1)
+        self.performance = 1.00
+        self.volume = 1 #initial volume
         self.logger = log
         self.status = {'status':'idle','action':''}
         self.quotes = quotes
@@ -103,9 +108,10 @@ class Agent(Learning, Indicators, Order):
         return None
 
     def trade(self):
+        # TO DO : NEED A WAY TO MAKE AGENT HOLD POSITION IF POTENTIAL PROFIT TOO LOW
         response = self.learn()
-        self.logger.debug('{agent} response is {response}'.format(agent=self, 
-                                                            response=response))
+        self.logger.info('{agent} response is {action}'.format(agent=self, 
+                                                            action=response))
         if response is 1:
             if self.status['status'] is not OPEN:
                 self.open_position(order=BUY)
@@ -124,14 +130,14 @@ class Agent(Learning, Indicators, Order):
         self.num_trades += 1
 
     def close_position(self):
-        self.close_order(self.status['action'], self.quotes[-1])
-        profit = self.get_profit()
+        profit = self.close_order(self.status['action'], self.quotes[-1])
         self.learnQ(self.states, self.status['action'], self.prev_states, profit)
         self.update_performance(profit)
         self.status['status'] = 'idle'
 
     def update_performance(self, profit):
-        self.performance += profit * self.volume * self.num_trades
+        self.performance += pow(self.performance, (profit / self.volume * self.num_trades))
+        self.volume = max(int(self.performance), 1)
         self.logger.info('{p} - {agent} performance:'.format(agent=self, 
                                                             p=self.performance))
 

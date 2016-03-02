@@ -34,9 +34,7 @@ class Order(object):
         self.logger.info('{volume} {action} closed by {agent} in {scope}. '\
                          'Profit = ${profit}.'.format(action=action, agent=self,
                       volume=self.volume, scope=self.scope, profit=self.profit))        
-    def get_profit(self):
         return self.profit
-
     
         
     
