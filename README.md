@@ -1,3 +1,3 @@
-# **flow** #
+# **Flow Documentation** #
 
-Flow is a high frequency algorithmic currency trading module that uses Learning on top of financial indicators to produce profit.
+## *Flow* is a high frequency algorithmic trading module that uses machine learning and artificial intelligence to self regulate and self optimize for maximum return. ##
