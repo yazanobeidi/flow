@@ -14,14 +14,17 @@ class Bankroll(object):
         self.transactions = 0
         self.logger.info('Bankroll initialized with $ {}'.format(funds))
 
-    def transaction(self, val):
+    def transaction(self, val, t=''):
         """
         Commits and logs a transaction.
+        :param: val: amount to transact
+        :param: t: type of transaction (withdrawal or deposit)
         """
         self.bankroll += val
         self.transactions += 1
-        self.logger.info('Transaction {id}: $ {val} added to bankroll: $ {br}'\
-                    .format(id=self.transactions, val=val, br=self.bankroll))
+        self.logger.info('{kind} transaction {id}:\t$ {val} added to '\
+                        'bankroll:\t$ {br}'.format(id=self.transactions, 
+                            val=val, br=self.bankroll, kind=t))
         if self.bankroll < 0:
             raise Exception('We ran out of money')
 

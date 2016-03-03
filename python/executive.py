@@ -10,12 +10,12 @@ QUOTES_CSV = 'data/DAT_NT_USDCAD_T_LAST_201601.csv'
 LOG_FILE = 'logs/runlog.log'
 VAULT = 'logs/bankroll.log'
 FUNDS = 1000 # Starting bankroll
-SCOPES = {1, 100, 1000, 10000} # Defines what scopes will be initialized
+SCOPES = {1, 1000, 10000} # Defines what scopes will be initialized
 Q = dict() # This could be moved to Learning or QLearn module
 ALPHA = 0.888
 REWARD = tuple()
 DISCOUNT = 0.01 # low discount factor = short sighted
-LIMIT = 11 # Maximum number of agents in a given scope
+LIMIT = 3 # Maximum number of agents in a given scope
 
 class Executive():
     """
@@ -75,7 +75,7 @@ class Executive():
         """
         new_quote = self.all_quotes[-x]
         self.quotes.append(new_quote)
-        self.logger.info('Quotes fetched')
+        self.logger.debug('Quotes fetched')
         return new_quote
 
     def print_quotes(self):

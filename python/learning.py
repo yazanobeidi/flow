@@ -9,6 +9,7 @@ class Learning(QLearn):
     the state tuple Indicators returns and one of 3 actions (0, 1 or -1).
     #TODO: research and implement new learning algorithms
     #TODO: combine multiple learning algorithms into a single response
+    #TODO: persist profitable learn-states
     """
     def __init__(self, q, alpha, reward, discount, initial_state, actions):
         self.q = {}
