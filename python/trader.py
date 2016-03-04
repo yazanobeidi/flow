@@ -4,7 +4,7 @@ from learning import Learning
 from indicators import Indicators
 from order import Order, BUY, SELL, OPEN, ACTIONS
 
-PERFORMANCE = 0.7 # Value between 0 and 1, 0 agent will always be fired, 1 never
+PERFORMANCE = 0.0 # Value between 0 and 1, 0 agent will always be fired, 1 never
 
 __author__ = 'yazan/matthew'
 
