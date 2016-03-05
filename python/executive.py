@@ -114,5 +114,5 @@ class Executive():
 
 
 if __name__ == "__main__":
-    trader = Executive()
-    trader.supervise()
+    Supervisor = Executive()
+    Supervisor.supervise()
