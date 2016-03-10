@@ -12,13 +12,13 @@ class Bankroll(object):
     To access real time log output of bankroll:
     $ tail -f -n 40 logs/bankroll.log
     """
-    def __init__(self, vault, funds):
+    def __init__(self, vault, funds, resolution):
         self.init_logging(vault)
         self.bankroll = [funds]
-        self.transactions = 0
+        self.transactions = [0]
         self.logger.info('Bankroll initialized with $ {}'.format(funds))
         self.xlim = 3000
-        self.init_plot()
+        self.Hud = HUD(self.transactions[-1], self.bankroll[-1], resolution)
 
     def transaction(self, val, t=''):
         """
@@ -27,8 +27,8 @@ class Bankroll(object):
         :param: t: type of transaction (withdrawal or deposit)
         """
         self.bankroll.append(self.get_bankroll() + val)
-        self.update_plot()
-        self.transactions += 1
+        self.transactions.append(self.transactions[-1] + 1)
+        self.Hud.update_plot(self.transactions, self.get_full_bankroll())
         self.logger.info('{kind} transaction {id}:\t$ {val} added to '\
                         'bankroll:\t$ {br}'.format(id=self.transactions, 
                             val=val, br=self.get_bankroll(), kind=t))
@@ -43,41 +43,6 @@ class Bankroll(object):
 
     def get_full_bankroll(self):
         return self.bankroll
-
-    def init_plot(self):
-        plt.ion()
-        self.fig, self.ax = plt.subplots(1, 1)
-        #self.line = Line2D([], [], color='red', linewidth=2)
-        #self.ax.add_line(self.line)
-        self.ax.set_aspect('equal')
-        self.ax.set_xlim(0, self.xlim)
-        self.ax.set_ylim(0, self.get_bankroll() * 2)
-        plt.xlabel('Transactions')
-        plt.ylabel('Funds')
-        self.ax.hold(True)
-        plt.show(False)
-        plt.draw()
-        self.background = self.fig.canvas.copy_from_bbox(self.ax.bbox)
-        #self.line, = self.ax.plot(self.transactions+10, self.get_bankroll(), '--r')
-        #self.points = self.ax.plot(self.transactions, self.bankroll, 'o')[0]
-        self.lines, = self.ax.plot(self.transactions, self.get_bankroll(), 'o')
-
-    def update_plot(self):
-        """
-        Work in progress
-        Updates plot on each transaction.
-        #TODO: solid line graph
-        #TODO: scroll once transaction > self.xlim if not already by default
-        """
-        self.xlim += 1
-        #self.ax.set_xlim(0, self.xlim)
-        self.lines.set_data(self.transactions, self.get_full_bankroll())
-        #self.line.set_data(self.transactions, self.get_bankroll())
-        #self.points.set_data(self.transactions, self.bankroll)
-        self.fig.canvas.restore_region(self.background)
-        #self.ax.draw_artist(self.lines)
-        self.ax.draw_artist(self.lines)
-        self.fig.canvas.blit(self.ax.bbox)
 
     def init_logging(self, log_file):
         """
@@ -96,34 +61,44 @@ class Bankroll(object):
         self.logger.addHandler(fh)
         self.logger.addHandler(ch)
 
-        '''
-    def init_plot(self):
-        plt.ion()
-        self.fig, self.ax = plt.subplots(1, 1)
-        self.ax.set_aspect('equal')
-        self.ax.set_xlim(0, self.xlim)
-        self.ax.set_ylim(0, self.bankroll * 2)
+
+class HUD(object):
+    def __init__(self, x, y, resolution):
+        self.resolution = resolution
+        self.resize_factor = 2
+        self.init_plot(x, y)
+
+    def init_plot(self, x, y):
+        #plt.ion()
+        self.fig = plt.figure()
         plt.xlabel('Transactions')
         plt.ylabel('Funds')
-        self.ax.hold(True)
+        plt.ylim(0, 2000)
+        plt.xlim(0, self.resolution)
+        plt.hold(True)
         plt.show(False)
         plt.draw()
-        self.background = self.fig.canvas.copy_from_bbox(self.ax.bbox)
-        #self.points = self.ax.plot(self.transactions, self.bankroll, 'o')[0]
-        self.lines, = self.ax.plot(self.transactions, self.get_bankroll(), 'o')
+        self.background = self.fig.canvas.copy_from_bbox(self.fig.bbox)
+        self.lines = plt.plot(x, y, 'o')[0]
 
-    def update_plot(self):
+    def update_plot(self, x, y):
         """
         Work in progress
         Updates plot on each transaction.
         #TODO: solid line graph
         #TODO: scroll once transaction > self.xlim if not already by default
         """
-        self.xlim += 1
+        if x[-1] % self.resolution == 0:
+            plt.xlim(0, self.resolution * self.resize_factor)
+            plt.draw()
+            self.background = self.fig.canvas.copy_from_bbox(self.fig.bbox)
+            self.resize_factor += 1
         #self.ax.set_xlim(0, self.xlim)
-        self.lines.set_data(self.transactions, self.get_bankroll())
+        self.lines.set_data(x, y)
+        #self.line.set_data(self.transactions, self.get_bankroll())
         #self.points.set_data(self.transactions, self.bankroll)
         self.fig.canvas.restore_region(self.background)
-        self.ax.draw_artist(self.lines)
-        self.fig.canvas.blit(self.ax.bbox)
-'''
+        #self.ax.draw_artist(self.lines)
+        self.fig.draw_artist(self.lines)
+        self.fig.canvas.blit(self.fig.bbox)
+        #self.fig.canvas.draw()

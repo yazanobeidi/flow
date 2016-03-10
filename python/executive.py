@@ -1,5 +1,6 @@
 from csv import reader
 import logging
+from datetime import datetime
 
 from trader import Scope
 from bankroll import Bankroll
@@ -9,13 +10,14 @@ __author__= 'yazan/matthew'
 QUOTES_CSV = 'data/DAT_NT_USDCAD_T_LAST_201601.csv'
 LOG_FILE = 'logs/runlog.log'
 VAULT = 'logs/bankroll.log'
+RESOLUTION = 20 # Width factor of bankroll plot output
 FUNDS = 1000 # Starting bankroll
 SCOPES = {1, 1000, 10000} # Defines what scopes will be initialized
 Q = dict() # This could be moved to Learning or QLearn module
 ALPHA = 0.888
 REWARD = tuple()
 DISCOUNT = 0.01 # low discount factor = short sighted
-LIMIT = 3 # Maximum number of agents in a given scope
+LIMIT = 30 # Maximum number of agents in a given scope
 
 class Executive():
     """
@@ -30,7 +32,7 @@ class Executive():
     def __init__(self):
         self.init_logging()
         self.logger.info('Initializing Executive...')
-        self.bankroll = Bankroll(VAULT, FUNDS)
+        self.bankroll = Bankroll(VAULT, FUNDS, RESOLUTION)
         self.all_quotes = []
         self.quotes = []
         self.scopes = []
@@ -43,9 +45,12 @@ class Executive():
         """
         self.logger.info('Running...')
         hop = 0
+        start_time = datetime.now()
         while hop < len(self.all_quotes):
-            self.logger.info('Hop {hop} Bankroll: {bankroll}'.format(hop=hop, 
-                                         bankroll=self.bankroll.get_bankroll()))
+            elapsed = (datetime.now() - start_time).total_seconds()
+            self.logger.info('Hop: {hop} Bankroll: {funds} Elapsed: {sec} '\
+                             'H/S = {hs}'.format(sec=elapsed, hop=hop, 
+                            funds=self.bankroll.get_bankroll(), hs=hop/elapsed))
             new_quote = self.get_new_quote(hop)
             for scope in self.active_scopes(hop):
                 scope.refresh(new_quote)
