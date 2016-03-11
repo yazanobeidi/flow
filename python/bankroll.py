@@ -1,8 +1,6 @@
-import numpy as np
-import matplotlib.pyplot as plt
-from matplotlib.lines import Line2D
-import matplotlib.animation as animation
 import logging
+from utils.plotter import Plotter
+from utils.exceptions import Bankruptcy
 
 __author__ = 'yazan'
 
@@ -10,30 +8,35 @@ class Bankroll(object):
     """
     This class bookkeeps transactions and maintains funds.
     To access real time log output of bankroll:
-    $ tail -f -n 40 logs/bankroll.log
+        $ tail -f -n 40 logs/bankroll.log
+    :param: vault: file path of desired Bankroll output.
+    :param: funds: initial bankroll funds.
+    :param: plot: Bool, whether or not you want to see a plot of Bankroll.
+    :param: resolution: desired upper x limit of initial bankroll plot.
     """
-    def __init__(self, vault, funds, resolution):
+    def __init__(self, vault, funds, plot=False, resolution=None):
         self.init_logging(vault)
-        self.bankroll = [funds]
-        self.transactions = [0]
-        self.logger.info('Bankroll initialized with $ {}'.format(funds))
-        self.xlim = 3000
-        self.Hud = HUD(self.transactions[-1], self.bankroll[-1], resolution)
+        self.bankroll, self.transactions = [funds], [0]
+        self.logger.info('{} initialized with $ {}'.format(self, funds))
+        self.plot = plot
+        if plot: self.Plot = Plotter(self.num_transactions(), 
+                                     self.get_bankroll(), resolution)
 
-    def transaction(self, val, t=''):
+    def transaction(self, val, _type=''):
         """
         Commits and logs a transaction.
         :param: val: amount to transact
-        :param: t: type of transaction (withdrawal or deposit)
+        :param: _type: type of transaction (withdrawal or deposit)
         """
         self.bankroll.append(self.get_bankroll() + val)
+        # Add increment to list of number of transactions (plot x axis):
         self.transactions.append(self.transactions[-1] + 1)
-        self.Hud.update_plot(self.transactions, self.get_full_bankroll())
+        if self.plot: self.Plot.update_plot(self.transactions, self.bankroll)
         self.logger.info('{kind} transaction {id}:\t$ {val} added to '\
-                        'bankroll:\t$ {br}'.format(id=self.transactions, 
-                            val=val, br=self.get_bankroll(), kind=t))
-        if self.bankroll < 0:
-            raise Exception('We ran out of money')
+                         'bankroll:\t$ {br}'.format(id=self.num_transactions(), 
+                                   val=val, br=self.get_bankroll(), kind=_type))
+        if self.get_bankroll() < 0:
+            raise Bankruptcy
 
     def get_bankroll(self):
         """
@@ -41,8 +44,11 @@ class Bankroll(object):
         """
         return self.bankroll[-1]
 
-    def get_full_bankroll(self):
-        return self.bankroll
+    def num_transactions(self):
+        """
+        Returns the number of transactions made so far.
+        """
+        return self.transactions[-1]
 
     def init_logging(self, log_file):
         """
@@ -60,45 +66,3 @@ class Bankroll(object):
         ch.setFormatter(formatter)
         self.logger.addHandler(fh)
         self.logger.addHandler(ch)
-
-
-class HUD(object):
-    def __init__(self, x, y, resolution):
-        self.resolution = resolution
-        self.resize_factor = 2
-        self.init_plot(x, y)
-
-    def init_plot(self, x, y):
-        #plt.ion()
-        self.fig = plt.figure()
-        plt.xlabel('Transactions')
-        plt.ylabel('Funds')
-        plt.ylim(0, 2000)
-        plt.xlim(0, self.resolution)
-        plt.hold(True)
-        plt.show(False)
-        plt.draw()
-        self.background = self.fig.canvas.copy_from_bbox(self.fig.bbox)
-        self.lines = plt.plot(x, y, 'o')[0]
-
-    def update_plot(self, x, y):
-        """
-        Work in progress
-        Updates plot on each transaction.
-        #TODO: solid line graph
-        #TODO: scroll once transaction > self.xlim if not already by default
-        """
-        if x[-1] % self.resolution == 0:
-            plt.xlim(0, self.resolution * self.resize_factor)
-            plt.draw()
-            self.background = self.fig.canvas.copy_from_bbox(self.fig.bbox)
-            self.resize_factor += 1
-        #self.ax.set_xlim(0, self.xlim)
-        self.lines.set_data(x, y)
-        #self.line.set_data(self.transactions, self.get_bankroll())
-        #self.points.set_data(self.transactions, self.bankroll)
-        self.fig.canvas.restore_region(self.background)
-        #self.ax.draw_artist(self.lines)
-        self.fig.draw_artist(self.lines)
-        self.fig.canvas.blit(self.fig.bbox)
-        #self.fig.canvas.draw()

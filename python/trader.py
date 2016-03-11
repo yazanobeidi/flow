@@ -3,8 +3,9 @@ from random import random
 from learning import Learning
 from indicators import Indicators
 from order import Order, BUY, SELL, OPEN, ACTIONS
+from utils.plotter import Plotter
 
-PERFORMANCE = 0.0 # Value between 0 and 1, 0 agent will always be fired, 1 never
+PERFORMANCE = 0.3 # Value between 0 and 1, 0 agent will always be fired, 1 never
 
 __author__ = 'yazan/matthew'
 
@@ -18,7 +19,7 @@ class Scope(object):
     #CONSIDER: update_limit() using sum of all agent performances / num agents
     """
     def __init__(self, scope, q, alpha, reward, discount, limit, quotes, 
-                                                                 bankroll, log):
+                                                     bankroll, log, plot=False):
         self.scope = scope
         self.q = q
         self.alpha = alpha
@@ -31,7 +32,11 @@ class Scope(object):
         self.performances = [1] # initial value of default performance
         self.agents = [Agent(self.scope, q, alpha, reward, discount, quotes, 
                                                          bankroll, self.logger)]
-
+        #self.plot = plot
+        #if plot:
+        #    self.scope_plot = Plotter(bankroll.num_transactions(), 
+        #                                    bankroll.get_bankroll())
+        
     def add_agent(self):
         """
         Adds a new idle agent to the scope.
@@ -86,7 +91,7 @@ class Scope(object):
         Evaluation of whether agent needs to be cut.
         """
         return (agent.num_good_trades / agent.num_trades) < PERFORMANCE if \
-                                                agent.num_trades is not 0 else False
+                                            agent.num_trades is not 0 else False
 
     def free_agents(self):
         """
@@ -181,7 +186,7 @@ class Agent(Learning, Indicators, Order):
         """
         potential = self.potential_profit(self.quotes[-1])
         self.logger.info('{attempt}CLOSE attempt: {val}'.format(val=potential,
-                                                                    attempt=self.close_attempts))
+                                                   attempt=self.close_attempts))
         if random() < 0.01 or potential > 0: #(self.performance * self.num_trades / self.age):
             profit = self.close_order(self.status['action'], self.quotes[-1])
             self.learnQ(self.states, self.status['action'], self.prev_states, profit)

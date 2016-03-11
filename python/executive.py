@@ -10,14 +10,14 @@ __author__= 'yazan/matthew'
 QUOTES_CSV = 'data/DAT_NT_USDCAD_T_LAST_201601.csv'
 LOG_FILE = 'logs/runlog.log'
 VAULT = 'logs/bankroll.log'
-RESOLUTION = 20 # Width factor of bankroll plot output
+RESOLUTION = 100 # Width factor of bankroll plot output
 FUNDS = 1000 # Starting bankroll
-SCOPES = {1, 1000, 10000} # Defines what scopes will be initialized
+SCOPES = {1, 1000} # Defines what scopes will be initialized
 Q = dict() # This could be moved to Learning or QLearn module
 ALPHA = 0.888
 REWARD = tuple()
 DISCOUNT = 0.01 # low discount factor = short sighted
-LIMIT = 30 # Maximum number of agents in a given scope
+LIMIT = 3 # Maximum number of agents in a given scope
 
 class Executive():
     """
@@ -32,7 +32,7 @@ class Executive():
     def __init__(self):
         self.init_logging()
         self.logger.info('Initializing Executive...')
-        self.bankroll = Bankroll(VAULT, FUNDS, RESOLUTION)
+        self.bankroll = Bankroll(VAULT, FUNDS, plot=True, resolution=RESOLUTION)
         self.all_quotes = []
         self.quotes = []
         self.scopes = []
@@ -71,7 +71,7 @@ class Executive():
         """
         for scope in SCOPES:
             self.scopes.append(Scope(scope, Q, ALPHA, REWARD, DISCOUNT, LIMIT,
-                                       self.quotes, self.bankroll, self.logger))
+                            self.quotes, self.bankroll, self.logger, plot=True))
         self.logger.info('Scopes generated')
 
     def get_new_quote(self, x):
