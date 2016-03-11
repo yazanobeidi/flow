@@ -14,22 +14,23 @@ class Plotter(object):
     :param: resolution: desired initial upper x limit of plotter
     """
     def __init__(self, x, y, resolution=1000):
+        self.plt = plt
         self.resolution = resolution
         self.resize_factor = 2
         self.init_plot(x, y)
 
     def init_plot(self, x, y):
-        plt.ion()
-        self.fig = plt.figure()
-        plt.xlabel('Transactions')
-        plt.ylabel('Funds')
-        plt.ylim(0, 2000)
-        plt.xlim(0, self.resolution)
-        plt.hold(True)
-        plt.show(False)
-        plt.draw()
+        self.plt.ion()
+        self.fig = self.plt.figure()
+        self.plt.xlabel('Transactions')
+        self.plt.ylabel('Funds')
+        self.plt.ylim(0, 2000)
+        self.plt.xlim(0, self.resolution)
+        self.plt.hold(True)
+        self.plt.show(False)
+        self.plt.draw()
         self.background = self.fig.canvas.copy_from_bbox(self.fig.bbox)
-        self.lines = plt.plot(x, y, 'o')[0]
+        self.lines = self.plt.plot(x, y, 'o')[0]
 
     def update_plot(self, x, y):
         """
@@ -38,8 +39,8 @@ class Plotter(object):
         print self.resolution
         if x[-1] % self.resolution == 0:
             # Increase x-lim as line is reaching the edge.
-            plt.xlim(0, self.resolution * self.resize_factor)
-            plt.draw()
+            self.plt.xlim(0, self.resolution * self.resize_factor)
+            self.plt.draw()
             self.background = self.fig.canvas.copy_from_bbox(self.fig.bbox)
             self.resize_factor += 1
         self.lines.set_data(x, y)

@@ -14,13 +14,11 @@ class Bankroll(object):
     :param: plot: Bool, whether or not you want to see a plot of Bankroll.
     :param: resolution: desired upper x limit of initial bankroll plot.
     """
-    def __init__(self, vault, funds, plot=False, resolution=None):
+    def __init__(self, vault, funds, plot=None):
         self.init_logging(vault)
         self.bankroll, self.transactions = [funds], [0]
         self.logger.info('{} initialized with $ {}'.format(self, funds))
         self.plot = plot
-        if plot: self.Plot = Plotter(self.num_transactions(), 
-                                     self.get_bankroll(), resolution)
 
     def transaction(self, val, _type=''):
         """
@@ -31,7 +29,7 @@ class Bankroll(object):
         self.bankroll.append(self.get_bankroll() + val)
         # Add increment to list of number of transactions (plot x axis):
         self.transactions.append(self.transactions[-1] + 1)
-        if self.plot: self.Plot.update_plot(self.transactions, self.bankroll)
+        if self.plot: self.plot.update_plot(self.transactions, self.bankroll)
         self.logger.info('{kind} transaction {id}:\t$ {val} added to '\
                          'bankroll:\t$ {br}'.format(id=self.num_transactions(), 
                                    val=val, br=self.get_bankroll(), kind=_type))

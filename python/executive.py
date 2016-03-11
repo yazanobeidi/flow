@@ -4,6 +4,7 @@ from datetime import datetime
 
 from trader import Scope
 from bankroll import Bankroll
+from utils.plotter import Plotter
 
 __author__= 'yazan/matthew'
 
@@ -11,8 +12,8 @@ QUOTES_CSV = 'data/DAT_NT_USDCAD_T_LAST_201601.csv'
 LOG_FILE = 'logs/runlog.log'
 VAULT = 'logs/bankroll.log'
 RESOLUTION = 100 # Width factor of bankroll plot output
-FUNDS = 1000 # Starting bankroll
-SCOPES = {1, 1000} # Defines what scopes will be initialized
+FUNDS = 100 # Starting bankroll
+SCOPES = {1} # Defines what scopes will be initialized
 Q = dict() # This could be moved to Learning or QLearn module
 ALPHA = 0.888
 REWARD = tuple()
@@ -32,10 +33,12 @@ class Executive():
     def __init__(self):
         self.init_logging()
         self.logger.info('Initializing Executive...')
-        self.bankroll = Bankroll(VAULT, FUNDS, plot=True, resolution=RESOLUTION)
+        self.bankroll_plot = Plotter([0], [FUNDS], RESOLUTION)
+        self.bankroll = Bankroll(VAULT, FUNDS, plot=self.bankroll_plot)
         self.all_quotes = []
         self.quotes = []
         self.scopes = []
+        self.scope_plots = {}
         self.load_csv()
         self.load_scopes()
 
@@ -70,6 +73,9 @@ class Executive():
         Creates scope instances (with their own agents) defined by SCOPES set.
         """
         for scope in SCOPES:
+            # Not sure why but if we allow scope plots, Python confuses between
+            # scope plot instances and bankroll plot instance.........???????
+            #self.scope_plots[scope] = Plotter([1,2,3,4,5], [44,11,64,232,54])
             self.scopes.append(Scope(scope, Q, ALPHA, REWARD, DISCOUNT, LIMIT,
                             self.quotes, self.bankroll, self.logger, plot=True))
         self.logger.info('Scopes generated')

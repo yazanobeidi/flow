@@ -19,7 +19,7 @@ class Scope(object):
     #CONSIDER: update_limit() using sum of all agent performances / num agents
     """
     def __init__(self, scope, q, alpha, reward, discount, limit, quotes, 
-                                                     bankroll, log, plot=False):
+                                                 bankroll, log=None, plot=None):
         self.scope = scope
         self.q = q
         self.alpha = alpha
@@ -29,13 +29,10 @@ class Scope(object):
         self.logger = log
         self.quotes = quotes
         self.limit = limit # max number of agents
+        self.plot = plot
         self.performances = [1] # initial value of default performance
         self.agents = [Agent(self.scope, q, alpha, reward, discount, quotes, 
                                                          bankroll, self.logger)]
-        #self.plot = plot
-        #if plot:
-        #    self.scope_plot = Plotter(bankroll.num_transactions(), 
-        #                                    bankroll.get_bankroll())
         
     def add_agent(self):
         """
