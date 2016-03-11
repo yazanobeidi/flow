@@ -2,6 +2,7 @@ from learning import Learning
 from indicators import Indicators
 from order import Order, BUY, SELL, OPEN, ACTIONS
 
+
 class Scope(object):
     def __init__(self, scope, q, alpha, reward, discount, quotes, 
                                                                  bankroll, all_profit, log):
@@ -96,7 +97,10 @@ class Agent(Learning, Indicators, Order):
             self.num_trades = +1
 
     def close_position(self):
-        self.close_order(self.status['action'], self.quotes[-1])
+        if self.status['action'] == BUY:
+            self.close_order(self.status['action'], self.quotes[-1]-0.0004)
+        else:
+            self.close_order(self.status['action'], self.quotes[-1]+0.0004)
         profit = self.get_profit()
         self.all_profit.append(profit)
         #self.learnQ(self.states, self.status['action'], self.prev_states, profit)
@@ -110,3 +114,6 @@ class Agent(Learning, Indicators, Order):
 
     def update(self, quote):
         self.quotes.append(quote)
+
+
+

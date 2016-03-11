@@ -1,12 +1,13 @@
-# moving average cross crossovers                
+# moving average cross crossovers
 class Indicators(object):
+
     def __init__(self, log=None):
         self.logger = log
-        self.state = (0,0,0,0,0,0,0,0,0,0)
-        
+        self.state = (0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+
     def get_states(self, quotes):
         self.quotes = quotes
-        #print len(quotes)
+        # print len(quotes)
         self.state = (self.crossover_indicator(self.quotes, 5, 7),
                       self.crossover_indicator(self.quotes, 5, 20),
                       self.crossover_indicator(self.quotes, 7, 30),
@@ -31,24 +32,25 @@ class Indicators(object):
     def crossover_indicator(self, q, x, y):
         #print("if current x less than y")
         if self.moving_average(x, q[-x:]) < self.moving_average(y, q[-y:]):
-            #print "if prev x greater than y"
-            if self.moving_average(x, q[-x-1:-1]) > self.moving_average(y, 
-                                                                    q[-y-1:-1]):
-                #print -1 
+            # print "if prev x greater than y"
+            if self.moving_average(x, q[-x-1:-1]) > self.moving_average(y,
+                                                                        q[-y-1:-1]):
+                #print -1
                 return -1
-        
+
         elif self.moving_average(x, q[-x:]) > self.moving_average(y, q[-y:]):
-            #print "if prev x less than y"
-            if self.moving_average(x, q[-x-1:-1]) < self.moving_average(y, 
-                                                                    q[-y-1:-1]):
-                #print 1
+            # print "if prev x less than y"
+            if self.moving_average(x, q[-x-1:-1]) < self.moving_average(y,
+                                                                        q[-y-1:-1]):
+                # print 1
                 return 1
-        #print 0
+        # print 0
         return 0
 
-#https://en.wikipedia.org/wiki/MACD#Mathematical_interpretation
+# https://en.wikipedia.org/wiki/MACD#Mathematical_interpretation
     def MACD(self, q, m1, m2):
-        signal = self.moving_average(m1, q[-m1:]) - self.moving_average(m2, q[-m2:])
+        signal = self.moving_average(
+            m1, q[-m1:]) - self.moving_average(m2, q[-m2:])
         return signal
 
     def MACD_series(self, q, m1, m2):
@@ -56,10 +58,11 @@ class Indicators(object):
         i = 0
         for quotes in q:
             if m2 > i:
-                series.append(self.moving_average(m1, q[-m1-i:-i]) - self.moving_average(m2, q[-m2-i:-i]))
+                series.append(
+                    self.moving_average(m1, q[-m1-i:-i]) - self.moving_average(m2, q[-m2-i:-i]))
             i += 1
-        if m2 < i:                                                
-            series.append(self.MACD(q,m1,m2))                                              
+        if m2 < i:
+            series.append(self.MACD(q, m1, m2))
         return series
 
     def MACD_sig_line(self, q, m1, m2, m3):
@@ -92,6 +95,7 @@ class Indicators(object):
         RS = 50.0
         updays = []
         downdays = []
+
         while (upcount <= period and downcount <= period) and i < len(q) - 1:
             if q[1+i] < q[i]:
                 updays.append(q[1+i])
@@ -101,16 +105,18 @@ class Indicators(object):
                 downcount += 1
             i += 1
         try:
-            RS = self.moving_average(period, updays) / self.moving_average(period, downdays)
+            RS = self.moving_average(
+                period, updays) / self.moving_average(period, downdays)
         except:
             RS = 0
-        #print self.moving_average(period, downdays)
+        # print self.moving_average(period, downdays)
         if float(self.moving_average(period, downdays)) != 0.0:
-            RS = float(self.moving_average(period, updays)) / float(self.moving_average(period, downdays))
-            #print RS
-        #print len(q)
+            RS = float(self.moving_average(period, updays)) / \
+                float(self.moving_average(period, downdays))
+            # print RS
+        # print len(q)
         RSI = (100-(100/(1+RS)))
-        #print RSI
+        # print RSI
         if RSI < threshold:
             return 1
         elif RSI > (100-threshold):
@@ -124,11 +130,3 @@ class Indicators(object):
         elif self.MACD(q, m1, m2) > self.moving_average(m3, self.series[-m2:]):
             return 1
         return 0
-
-    
-                
-                
-        
-
-    
-

@@ -2,13 +2,14 @@ from csv import reader
 import logging
 from trader import Scope
 from bankroll import Bankroll
+from order import Order, BUY, SELL, OPEN, ACTIONS
 
 QUOTES_CSV = 'data/DAT_NT_USDCAD_T_LAST_201601.csv'
 LOG_FILE = 'logs/runlog.log'
 #SCOPES = {10, 50, 100, 500, 3600, 14400}
 #scopenum = [10, 50, 100, 500, 3600, 14400]
-SCOPES = {100}
-scopenum = [100]
+SCOPES = {1}
+scopenum = [1]
 Q = dict()
 ALPHA = 0.5
 REWARD = tuple()
@@ -109,9 +110,8 @@ class Executive():
         self.logger.addHandler(fh)
         self.logger.addHandler(ch)
 
-
 if __name__ == "__main__":
     trader = Executive()
     trader.start()
-    #trader.print_quotes()
+
     
