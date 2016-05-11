@@ -3,6 +3,10 @@ import random
 __author__ = 'micheal/yazan'
 
 class QLearn():
+    """
+    This class defines the Q Learning model free reinforcement learning 
+    algorithm, essentially mapping a state tuple to an optimal action.
+    """
     def __init__(self, all_actions, state_size, alpha):
         self.alpha = alpha
         self.all_actions = all_actions
@@ -23,7 +27,7 @@ class QLearn():
             raise Exception('invalid state dim')
 
         # random actions are needed for learning to avoid local optimums
-        if random.random() < 0.10:
+        if random.random() < 0.07:
             return random.choice(self.all_actions)
 
         all_q_vals = [(action, self.Q(s, action)) for action in self.all_actions]
