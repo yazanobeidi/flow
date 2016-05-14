@@ -14,7 +14,7 @@ Installation
 
 1. Clone the project:
 
-   `$ git clone https://-yazan@bitbucket.org/-yazan/flow.git && cd flow`
+   `$ git clone https://github.com/yazanobeidi/flow.git && cd flow`
 
 2. Pip-install dependencies. For example using a `virtualenv`:
 
