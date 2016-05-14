@@ -5,7 +5,7 @@ Flow
 
 The current approach uses a stack of financial indicators which is consumed by a Q-learning algorithm which determines an Agent's action at a given step in the stream of financial quotes.
 
-Flow uses an idea called Scopes which is essentially a sampling of the time series quotes to discover trends along any sort of time interval. At every moment, the Supervisor ensures there is at least one Agent looking for an opportunity to boost profits.
+Flow uses an idea called Scopes which is essentially a sampling of the time series quotes to discover trends along any sort of time interval. At every moment, the Supervisor ensures there is at least one Agent per scope looking for an opportunity to make a profitable trade.
 
 Currently trades CAD/USD from quotes taken from January 2016. A fork that actually ties into a trading platform practice account has also been developed - this fork actually makes a profit before accounting for spread.
 
